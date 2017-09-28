@@ -31,8 +31,8 @@
       <class>northwind.model.EmployeeTerritory</class>
       <class>northwind.model.EmployeeTerritoryPK</class>
       <class>northwind.model.Employee</class>
-      <class>northwind.model.Order_Detail</class>
-      <class>northwind.model.Order_DetailPK</class>
+      <class>northwind.model.OrderDetail</class>
+      <class>northwind.model.OrderDetailPK</class>
       <class>northwind.model.Order</class>
       <class>northwind.model.Product</class>
       <properties>

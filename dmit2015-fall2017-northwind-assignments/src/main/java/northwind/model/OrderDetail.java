@@ -11,12 +11,12 @@ import java.math.BigDecimal;
  */
 @Entity
 @Table(name="`Order Details`")
-@NamedQuery(name="Order_Detail.findAll", query="SELECT o FROM Order_Detail o")
-public class Order_Detail implements Serializable {
+@NamedQuery(name="OrderDetail.findAll", query="SELECT o FROM OrderDetail o")
+public class OrderDetail implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
-	private Order_DetailPK id;
+	private OrderDetailPK id;
 
 	@Column(name="Discount")
 	private double discount;
@@ -29,22 +29,22 @@ public class Order_Detail implements Serializable {
 
 	//bi-directional many-to-one association to Order
 	@ManyToOne
-	@JoinColumn(name="OrderID")
+	@JoinColumn(name="OrderID",insertable=false, updatable=false)
 	private Order order;
 
 	//bi-directional many-to-one association to Product
 	@ManyToOne
-	@JoinColumn(name="ProductID")
+	@JoinColumn(name="ProductID",insertable=false,updatable=false)
 	private Product product;
 
-	public Order_Detail() {
+	public OrderDetail() {
 	}
 
-	public Order_DetailPK getId() {
+	public OrderDetailPK getId() {
 		return this.id;
 	}
 
-	public void setId(Order_DetailPK id) {
+	public void setId(OrderDetailPK id) {
 		this.id = id;
 	}
 

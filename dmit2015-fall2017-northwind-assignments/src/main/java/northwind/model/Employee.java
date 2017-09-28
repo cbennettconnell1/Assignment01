@@ -76,10 +76,6 @@ public class Employee implements Serializable {
 	@Column(name="TitleOfCourtesy")
 	private String titleOfCourtesy;
 
-	//bi-directional many-to-one association to EmployeeTerritory
-	@OneToMany(mappedBy="employee")
-	private List<EmployeeTerritory> employeeTerritories;
-
 	//bi-directional many-to-one association to Employee
 	@ManyToOne
 	@JoinColumn(name="ReportsTo")
@@ -238,28 +234,6 @@ public class Employee implements Serializable {
 
 	public void setTitleOfCourtesy(String titleOfCourtesy) {
 		this.titleOfCourtesy = titleOfCourtesy;
-	}
-
-	public List<EmployeeTerritory> getEmployeeTerritories() {
-		return this.employeeTerritories;
-	}
-
-	public void setEmployeeTerritories(List<EmployeeTerritory> employeeTerritories) {
-		this.employeeTerritories = employeeTerritories;
-	}
-
-	public EmployeeTerritory addEmployeeTerritory(EmployeeTerritory employeeTerritory) {
-		getEmployeeTerritories().add(employeeTerritory);
-		employeeTerritory.setEmployee(this);
-
-		return employeeTerritory;
-	}
-
-	public EmployeeTerritory removeEmployeeTerritory(EmployeeTerritory employeeTerritory) {
-		getEmployeeTerritories().remove(employeeTerritory);
-		employeeTerritory.setEmployee(null);
-
-		return employeeTerritory;
 	}
 
 	public Employee getEmployee() {

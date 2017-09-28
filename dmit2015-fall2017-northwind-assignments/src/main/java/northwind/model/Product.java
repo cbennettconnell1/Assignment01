@@ -45,9 +45,9 @@ public class Product implements Serializable {
 	@Column(name="UnitsOnOrder")
 	private short unitsOnOrder;
 
-	//bi-directional many-to-one association to Order_Detail
+	//bi-directional many-to-one association to OrderDetail
 	@OneToMany(mappedBy="product")
-	private List<Order_Detail> orderDetails;
+	private List<OrderDetail> orderDetails;
 
 	//bi-directional many-to-one association to Category
 	@ManyToOne
@@ -129,22 +129,22 @@ public class Product implements Serializable {
 		this.unitsOnOrder = unitsOnOrder;
 	}
 
-	public List<Order_Detail> getOrderDetails() {
+	public List<OrderDetail> getOrderDetails() {
 		return this.orderDetails;
 	}
 
-	public void setOrderDetails(List<Order_Detail> orderDetails) {
+	public void setOrderDetails(List<OrderDetail> orderDetails) {
 		this.orderDetails = orderDetails;
 	}
 
-	public Order_Detail addOrderDetail(Order_Detail orderDetail) {
+	public OrderDetail addOrderDetail(OrderDetail orderDetail) {
 		getOrderDetails().add(orderDetail);
 		orderDetail.setProduct(this);
 
 		return orderDetail;
 	}
 
-	public Order_Detail removeOrderDetail(Order_Detail orderDetail) {
+	public OrderDetail removeOrderDetail(OrderDetail orderDetail) {
 		getOrderDetails().remove(orderDetail);
 		orderDetail.setProduct(null);
 

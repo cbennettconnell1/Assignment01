@@ -24,7 +24,7 @@ public class Category implements Serializable {
 	private String categoryName;
 
 	@Lob
-	@Column(name="Description")
+	@Column(name="Description",columnDefinition="MEDIUMTEXT")
 	private String description;
 
 	@Lob

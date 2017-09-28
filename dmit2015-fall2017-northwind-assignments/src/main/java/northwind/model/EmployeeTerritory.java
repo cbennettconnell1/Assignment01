@@ -17,11 +17,6 @@ public class EmployeeTerritory implements Serializable {
 	@EmbeddedId
 	private EmployeeTerritoryPK id;
 
-	//bi-directional many-to-one association to Employee
-	@ManyToOne
-	@JoinColumn(name="EmployeeID")
-	private Employee employee;
-
 	public EmployeeTerritory() {
 	}
 
@@ -31,14 +26,6 @@ public class EmployeeTerritory implements Serializable {
 
 	public void setId(EmployeeTerritoryPK id) {
 		this.id = id;
-	}
-
-	public Employee getEmployee() {
-		return this.employee;
-	}
-
-	public void setEmployee(Employee employee) {
-		this.employee = employee;
 	}
 
 }
