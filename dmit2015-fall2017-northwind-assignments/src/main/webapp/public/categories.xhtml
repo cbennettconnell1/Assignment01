@@ -22,7 +22,14 @@
 
 	<ui:define name="maincontent">
 		<h1>List of Categories</h1>
-		[PUT PAGE CONTENT CODE HERE]
+		<h:dataTable value ="#{categoryController.categories}" var="currentCategory">
+			<h:column>
+				<h:outputText value="#{currentCategory.categoryID}"/>
+			</h:column>
+			<h:column>
+				<h:outputText value="#{currentCategory.categoryName}"/>
+			</h:column>
+		</h:dataTable>
 				
 	</ui:define>
 
