@@ -22,7 +22,63 @@
 
 	<ui:define name="maincontent">
 		<h1>List of Orders</h1>
-		[PUT PAGE CONTENT CODE HERE]
+		
+		<h:form>
+			<b:dataTable value="#{OrderController.orders}" var="order">
+			
+				<b:dataTableColumn value="#{orders.OrderID}">
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn value="#{orders.CustomerID}">
+				</b:dataTableColumn>	
+
+				<b:dataTableColumn value="#{orders.EmployeeID}">
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn value="#{orders.OrderDate}">
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn value="#{orders.RequiredDate}">
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn value="#{orders.ShippedDate}">
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn value="#{orders.ShipVia}">
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn value="#{orders.Freight}">
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn value="#{orders.ShipName}">
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn value="#{orders.ShipAddress}">
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn value="#{orders.ShipCity}">
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn value="#{orders.ShipRegion}">
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn value="#{orders.ShipPostalCode}">
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn value="#{orders.ShipCountry}">
+				</b:dataTableColumn>
+				
+				
+				
+				
+				
+				
+				
+							
+			</b:dataTable>
+		</h:form>
+		
+		
 				
 	</ui:define>
 
