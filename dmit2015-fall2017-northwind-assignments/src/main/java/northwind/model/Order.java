@@ -209,4 +209,13 @@ public class Order implements Serializable {
 		this.employee = employee;
 	}
 
+	@Override
+	public String toString() {
+		return "Order [orderID=" + orderID + ", freight=" + freight + ", orderDate=" + orderDate + ", requiredDate="
+				+ requiredDate + ", shipAddress=" + shipAddress + ", shipCity=" + shipCity + ", shipCountry="
+				+ shipCountry + ", shipName=" + shipName + ", shippedDate=" + shippedDate + ", shipPostalCode="
+				+ shipPostalCode + ", shipRegion=" + shipRegion + ", shipVia=" + shipVia + ", orderDetails="
+				+ orderDetails + ", customer=" + customer + ", employee=" + employee + "]";
+	}
+
 }
