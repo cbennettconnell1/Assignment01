@@ -26,19 +26,19 @@
 		<h:form>
 			<b:dataTable value="#{OrderController.orders}" var="order">
 			
-				<b:dataTableColumn value="#{orders.OrderID}">
+				<b:dataTableColumn value="#{order.OrderID}">
 				</b:dataTableColumn>
 				
-				<b:dataTableColumn value="#{orders.CustomerID}">
+				<b:dataTableColumn value="#{order.CustomerID}">
 				</b:dataTableColumn>	
 
-				<b:dataTableColumn value="#{orders.EmployeeID}">
+				<b:dataTableColumn value="#{order.EmployeeID}">
 				</b:dataTableColumn>
 				
-				<b:dataTableColumn value="#{orders.OrderDate}">
+				<b:dataTableColumn value="#{order.OrderDate}">
 				</b:dataTableColumn>
 				
-				<b:dataTableColumn value="#{orders.RequiredDate}">
+				<b:dataTableColumn value="#{order.RequiredDate}">
 				</b:dataTableColumn>
 				
 				<b:dataTableColumn value="#{orders.ShippedDate}">
