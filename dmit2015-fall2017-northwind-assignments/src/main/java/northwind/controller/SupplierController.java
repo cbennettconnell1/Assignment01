@@ -20,12 +20,12 @@ public class SupplierController {
 	@PostConstruct
 	void init()
 	{
-		suppliers = categoryRepository.findAll();
+		suppliers = supplierRepository.findAll();
 	}
 	
 	
-	public List<Category> getCategories()
+	public List<Supplier> getSuppliers()
 	{
-		return categories;
+		return suppliers;
 	}
 }
