@@ -134,7 +134,7 @@ public class Order implements Serializable {
 	}
 
 	public String getShipName() {
-		return this.shipName;
+		return this.shipName; 
 	}
 
 	public void setShipName(String shipName) {
@@ -203,6 +203,8 @@ public class Order implements Serializable {
 		this.employee = employee;
 	}
 
+<<<<<<< HEAD
+=======
 	public Shipper getShipper() {
 		return this.shipper;
 	}
@@ -211,4 +213,5 @@ public class Order implements Serializable {
 		this.shipper = shipper;
 	}
 
+>>>>>>> branch 'master' of https://github.com/cbennettconnell1/Assignment01.git
 }

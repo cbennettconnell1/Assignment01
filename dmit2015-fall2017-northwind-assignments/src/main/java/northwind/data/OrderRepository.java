@@ -1,24 +1,20 @@
 package northwind.data;
 
-import java.util.List;
-
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-
 import northwind.model.Order;
 
-@Stateless
-@LocalBean
-public class OrderRepository {
+public class OrderRepository extends AbstractJpaRepository<Order>{
+	private static final long serialVersionUID = 1L;
 	
-	@Inject
-	private EntityManager em;
-	
-	public List<Order> findAll(){
-		return em.createQuery("SELECT o FROM Order o", Order.class).getResultList();
-	
-	
+	public OrderRepository() 
+	{
+		super(Order.class);
 	}
 }
+	
+
+
+
+
+
+
+
