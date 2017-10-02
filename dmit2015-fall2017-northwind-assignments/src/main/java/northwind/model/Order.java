@@ -132,7 +132,7 @@ public class Order implements Serializable {
 	}
 
 	public String getShipName() {
-		return this.shipName;
+		return this.shipName; 
 	}
 
 	public void setShipName(String shipName) {
@@ -207,15 +207,6 @@ public class Order implements Serializable {
 
 	public void setEmployee(Employee employee) {
 		this.employee = employee;
-	}
-
-	@Override
-	public String toString() {
-		return "Order [orderID=" + orderID + ", freight=" + freight + ", orderDate=" + orderDate + ", requiredDate="
-				+ requiredDate + ", shipAddress=" + shipAddress + ", shipCity=" + shipCity + ", shipCountry="
-				+ shipCountry + ", shipName=" + shipName + ", shippedDate=" + shippedDate + ", shipPostalCode="
-				+ shipPostalCode + ", shipRegion=" + shipRegion + ", shipVia=" + shipVia + ", orderDetails="
-				+ orderDetails + ", customer=" + customer + ", employee=" + employee + "]";
 	}
 
 }

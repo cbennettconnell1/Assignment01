@@ -24,56 +24,36 @@
 		<h1>List of Orders</h1>
 		
 		<h:form>
-			<b:dataTable value="#{OrderController.orders}" var="order">
+			<b:dataTable value="#{orderController.orders}" var="orders">
 			
-				<b:dataTableColumn value="#{orders.OrderID}">
+				<b:dataTableColumn value="#{orders.orderID}">
 				</b:dataTableColumn>
 				
-				<b:dataTableColumn value="#{orders.CustomerID}">
+				<b:dataTableColumn value="#{orders.customer}">
 				</b:dataTableColumn>	
 
-				<b:dataTableColumn value="#{orders.EmployeeID}">
+				<b:dataTableColumn value="#{orders.employee}">
 				</b:dataTableColumn>
 				
-				<b:dataTableColumn value="#{orders.OrderDate}">
+<!-- 				<h:outputText value="{orders.orderDate}" > -->
+<!-- 				  <f:convertDateTime pattern="yyyy-MM-dd" /> -->
+<!-- 				</h:outputText> -->
+				
+ 				<b:dataTableColumn value="#{orders.orderDate}"> 
+				</b:dataTableColumn>
+
+				
+				<b:dataTableColumn value="#{orders.requiredDate}">
 				</b:dataTableColumn>
 				
-				<b:dataTableColumn value="#{orders.RequiredDate}">
+				<b:dataTableColumn value="#{orders.shippedDate}">
 				</b:dataTableColumn>
 				
-				<b:dataTableColumn value="#{orders.ShippedDate}">
+				<b:dataTableColumn value="#{orders.shipVia}">
 				</b:dataTableColumn>
 				
-				<b:dataTableColumn value="#{orders.ShipVia}">
-				</b:dataTableColumn>
-				
-				<b:dataTableColumn value="#{orders.Freight}">
-				</b:dataTableColumn>
-				
-				<b:dataTableColumn value="#{orders.ShipName}">
-				</b:dataTableColumn>
-				
-				<b:dataTableColumn value="#{orders.ShipAddress}">
-				</b:dataTableColumn>
-				
-				<b:dataTableColumn value="#{orders.ShipCity}">
-				</b:dataTableColumn>
-				
-				<b:dataTableColumn value="#{orders.ShipRegion}">
-				</b:dataTableColumn>
-				
-				<b:dataTableColumn value="#{orders.ShipPostalCode}">
-				</b:dataTableColumn>
-				
-				<b:dataTableColumn value="#{orders.ShipCountry}">
-				</b:dataTableColumn>
-				
-				
-				
-				
-				
-				
-				
+				<b:dataTableColumn value="#{orders.freight}">
+				</b:dataTableColumn>				
 							
 			</b:dataTable>
 		</h:form>

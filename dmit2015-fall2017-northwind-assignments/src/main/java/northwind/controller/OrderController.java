@@ -9,11 +9,11 @@ import javax.inject.Inject;
 import northwind.data.OrderRepository;
 import northwind.model.Order;
 
-@Model
+@Model   //needed this*****
 public class OrderController {
 	
 	@Inject
-	private OrderRepository orderRepository; 
+	private OrderRepository orderRepository;
 	
 	private List<Order> orders;
 	
@@ -21,10 +21,12 @@ public class OrderController {
 	void init() 
 	{
 		orders = orderRepository.findAll();
-	}		
+	}
 	
-	public List<Order> getOrders()
-	{
+	public List<Order> getOrders() {
 		return orders;
 	}
+
 }
+
+
