@@ -24,7 +24,7 @@ public class SupplierController {
 	}
 	
 	
-	public List<Supplier> getCategories()
+	public List<Supplier> getSuppliers()
 	{
 		return suppliers;
 	}
