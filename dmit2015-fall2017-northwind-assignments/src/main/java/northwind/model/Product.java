@@ -33,9 +33,6 @@ public class Product implements Serializable {
 	@Column(name="ReorderLevel")
 	private short reorderLevel;
 
-	@Column(name="SupplierID")
-	private int supplierID;
-
 	@Column(name="UnitPrice")
 	private BigDecimal unitPrice;
 
@@ -53,6 +50,11 @@ public class Product implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="CategoryID")
 	private Category category;
+
+	//bi-directional many-to-one association to Supplier
+	@ManyToOne
+	@JoinColumn(name="SupplierID")
+	private Supplier supplier;
 
 	public Product() {
 	}
@@ -95,14 +97,6 @@ public class Product implements Serializable {
 
 	public void setReorderLevel(short reorderLevel) {
 		this.reorderLevel = reorderLevel;
-	}
-
-	public int getSupplierID() {
-		return this.supplierID;
-	}
-
-	public void setSupplierID(int supplierID) {
-		this.supplierID = supplierID;
 	}
 
 	public BigDecimal getUnitPrice() {
@@ -157,6 +151,14 @@ public class Product implements Serializable {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	public Supplier getSupplier() {
+		return this.supplier;
+	}
+
+	public void setSupplier(Supplier supplier) {
+		this.supplier = supplier;
 	}
 
 }

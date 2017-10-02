@@ -22,8 +22,32 @@
 
 	<ui:define name="maincontent">
 		<h1>List of Products</h1>
+		<h:form>
+			<b:dataTable value ="#{productController.products}" var="product">
 		
-		[PUT PAGE CONTENT CODE HERE]
+				<b:dataTableColumn value="#{product.productID}">
+				</b:dataTableColumn>
+			
+				<b:dataTableColumn value="#{product.productName}" >
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn value="#{product.unitPrice}" >
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn value="#{product.quantityPerUnit}" >
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn value="#{product.supplierID}">
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn value="#{(product.discontinued == 0) ? 'false' : 'true'}" >
+					<f:facet name="header">
+						Discontinued
+					</f:facet>
+				</b:dataTableColumn>
+			</b:dataTable>
+		</h:form>		
+		
 				
 	</ui:define>
 

@@ -22,7 +22,17 @@
 
 	<ui:define name="maincontent">
 		<h1>List of Shippers</h1>
-		
+			<h:form>
+			<b:dataTable value="#{shipperController.shippers}" var="shipper">
+				<b:dataTableColumn value="#{shipper.shipperID}">
+				</b:dataTableColumn>
+				<b:dataTableColumn value="#{shipper.companyName}">
+				</b:dataTableColumn>
+				<b:dataTableColumn value="#{shipper.phone}">
+				</b:dataTableColumn>
+						
+			</b:dataTable>
+		</h:form>
 	</ui:define>
 
 </ui:composition>
