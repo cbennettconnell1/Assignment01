@@ -89,6 +89,10 @@ public class Employee implements Serializable {
 	@OneToMany(mappedBy="employee")
 	private List<Order> orders;
 
+	//bi-directional many-to-many association to Territory
+	@ManyToMany(mappedBy="employees")
+	private List<Territory> territories;
+
 	public Employee() {
 	}
 
@@ -286,6 +290,14 @@ public class Employee implements Serializable {
 		order.setEmployee(null);
 
 		return order;
+	}
+
+	public List<Territory> getTerritories() {
+		return this.territories;
+	}
+
+	public void setTerritories(List<Territory> territories) {
+		this.territories = territories;
 	}
 
 }

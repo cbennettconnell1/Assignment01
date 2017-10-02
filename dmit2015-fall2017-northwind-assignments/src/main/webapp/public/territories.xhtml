@@ -24,6 +24,11 @@
 		<h1>List of Territories</h1>
 		
 		[PUT PAGE CONTENT CODE HERE]
+		
+		<h:form>
+			<b:dataTable value="#{employeeTerritoryController.territories}" var="employeeTerritory">
+				<b:dataTableColumn value="#{employeeTerritory.employeeId}">
+				</b:dataTableColumn>
 				
 	</ui:define>
 

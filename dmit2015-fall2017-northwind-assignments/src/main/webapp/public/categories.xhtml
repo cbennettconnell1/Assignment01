@@ -22,8 +22,23 @@
 
 	<ui:define name="maincontent">
 		<h1>List of Categories</h1>
-		[PUT PAGE CONTENT CODE HERE]
+		<h:form>
+			<b:dataTable value ="#{categoryController.categories}" var="currentCategory">
+		
+				<b:dataTableColumn value="#{currentCategory.categoryID}">
+				</b:dataTableColumn>
+			
+				<b:dataTableColumn value="#{currentCategory.categoryName}" >
+				</b:dataTableColumn>
 				
+				<b:dataTableColumn value="#{currentCategory.description}" >
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn value="#{currentCategory.picture}" >
+				</b:dataTableColumn> 
+						
+			</b:dataTable>
+		</h:form>		
 	</ui:define>
 
 </ui:composition>

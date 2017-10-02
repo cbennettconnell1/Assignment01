@@ -55,9 +55,6 @@ public class Order implements Serializable {
 	@Column(name="ShipRegion")
 	private String shipRegion;
 
-	@Column(name="ShipVia")
-	private int shipVia;
-
 	//bi-directional many-to-one association to OrderDetail
 	@OneToMany(mappedBy="order")
 	private List<OrderDetail> orderDetails;
@@ -71,6 +68,11 @@ public class Order implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="EmployeeID")
 	private Employee employee;
+
+	//bi-directional many-to-one association to Shipper
+	@ManyToOne
+	@JoinColumn(name="ShipVia")
+	private Shipper shipper;
 
 	public Order() {
 	}
@@ -163,14 +165,6 @@ public class Order implements Serializable {
 		this.shipRegion = shipRegion;
 	}
 
-	public int getShipVia() {
-		return this.shipVia;
-	}
-
-	public void setShipVia(int shipVia) {
-		this.shipVia = shipVia;
-	}
-
 	public List<OrderDetail> getOrderDetails() {
 		return this.orderDetails;
 	}
@@ -209,4 +203,15 @@ public class Order implements Serializable {
 		this.employee = employee;
 	}
 
+<<<<<<< HEAD
+=======
+	public Shipper getShipper() {
+		return this.shipper;
+	}
+
+	public void setShipper(Shipper shipper) {
+		this.shipper = shipper;
+	}
+
+>>>>>>> branch 'master' of https://github.com/cbennettconnell1/Assignment01.git
 }
