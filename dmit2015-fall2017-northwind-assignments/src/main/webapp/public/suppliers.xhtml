@@ -22,8 +22,16 @@
 
 	<ui:define name="maincontent">
 		<h1>List of Suppliers</h1>
-					<h:form>
-
+		<h:form>
+			<b:dataTable value ="#{supplierController.suppliers}" var="supplier">
+				<b:dataTableColumn value="#{supplier.supplierID}"> </b:dataTableColumn>
+				<b:dataTableColumn value="#{supplier.companyName}"> </b:dataTableColumn>
+				<b:dataTableColumn value="#{supplier.contactName}"> </b:dataTableColumn>
+				<b:dataTableColumn value="#{supplier.contactTitle}"> </b:dataTableColumn>
+				<b:dataTableColumn value="#{supplier.city}"> </b:dataTableColumn>
+				<b:dataTableColumn value="#{supplier.country}"> </b:dataTableColumn>
+				<b:dataTableColumn value="#{supplier.phone}"> </b:dataTableColumn>
+			</b:dataTable>
 		</h:form>
 		
 				
