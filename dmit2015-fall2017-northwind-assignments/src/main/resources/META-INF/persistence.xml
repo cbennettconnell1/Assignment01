@@ -31,7 +31,6 @@
       <class>northwind.model.Employee</class>
       <class>northwind.model.OrderDetail</class>
       <class>northwind.model.OrderDetailPK</class>
-      <class>northwind.model.Order</class>
       <class>northwind.model.Product</class>
       <class>northwind.model.Region</class>
       <class>northwind.model.Shipper</class>
