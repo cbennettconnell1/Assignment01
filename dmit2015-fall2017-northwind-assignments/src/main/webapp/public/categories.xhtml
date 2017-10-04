@@ -34,8 +34,11 @@
 				<b:dataTableColumn value="#{currentCategory.description}" >
 				</b:dataTableColumn>
 				
-				<b:dataTableColumn value="#{currentCategory.picture}">
-				<o:graphicImage> </o:graphicImage>
+				<b:dataTableColumn >
+				<f:facet name="header">
+						Picture
+					</f:facet>
+				<o:graphicImage value="#{currentCategory.picture}" dataURI="true"> </o:graphicImage>
 				</b:dataTableColumn> 
 						
 			</b:dataTable>
