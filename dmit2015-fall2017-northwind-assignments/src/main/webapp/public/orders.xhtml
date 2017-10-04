@@ -45,19 +45,30 @@
 					<h:outputText value="#{orders.employee.firstName} #{orders.employee.lastName}" />
 				</b:dataTableColumn>	
 				
- 				<b:dataTableColumn value="#{orders.orderDate}"> 
-				</b:dataTableColumn>
-				
-				
+ 				<b:dataTableColumn>
+ 				 <f:facet name="header">
+						Order Date
+					</f:facet>
+	 				<h:outputText value="#{orders.orderDate}" >
+						<f:convertDateTime pattern="yyyy-MM-dd"/>
+					</h:outputText>
+				</b:dataTableColumn>				
 				
 				<b:dataTableColumn value="#{orders.shipper.companyName}">
 				<f:facet name="header">
 						Shipper
 					</f:facet>
-				</b:dataTableColumn>
+				</b:dataTableColumn>		
 				
-				<b:dataTableColumn value="#{orders.freight}">
-				</b:dataTableColumn>				
+				<b:dataTableColumn>
+					<f:facet name="header">
+						Freight
+					</f:facet>
+					<h:outputText value="#{orders.freight}">
+						<f:convertNumber type="currency" />
+					</h:outputText>
+				</b:dataTableColumn>
+								
 							
 			</b:dataTable>
 		</h:form>
