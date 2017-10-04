@@ -31,13 +31,19 @@
 				<b:dataTableColumn value="#{product.productName}" >
 				</b:dataTableColumn>
 				
-				<b:dataTableColumn value="#{product.unitPrice}" >
+				<b:dataTableColumn>
+				<f:facet name="header">
+						Unit Price
+					</f:facet>
+					<h:outputText value="#{product.unitPrice}">
+						<f:convertNumber type="currency" />
+					</h:outputText>
 				</b:dataTableColumn>
 				
 				<b:dataTableColumn value="#{product.quantityPerUnit}" >
 				</b:dataTableColumn>
 				
-				<b:dataTableColumn value="#{product.supplier}">
+				<b:dataTableColumn value="#{product.supplier.companyName}">
 				</b:dataTableColumn>
 				
 				<b:dataTableColumn value="#{(product.discontinued == 0) ? 'false' : 'true'}" >
