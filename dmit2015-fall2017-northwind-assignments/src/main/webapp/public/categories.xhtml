@@ -34,13 +34,13 @@
 				<b:dataTableColumn value="#{currentCategory.description}" >
 				</b:dataTableColumn>
 				
-				<b:dataTableColumn >
-				<f:facet name="header">
-						Picture
-					</f:facet>
-				<o:graphicImage value="#{currentCategory.picture}" dataURI="true"> </o:graphicImage>
-				</b:dataTableColumn> 
-						
+				<b:dataTableColumn>
+					<f:facet name="header">Action</f:facet>
+					<b:navCommandLink outcome="productsbycategory.xhtml">
+						view products
+						<f:param name="id" value="#{currentCategory.categoryID}"/>
+					</b:navCommandLink>
+				</b:dataTableColumn>		
 			</b:dataTable>
 		</h:form>		
 	</ui:define>
