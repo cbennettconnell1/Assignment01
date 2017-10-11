@@ -51,6 +51,15 @@
 						Discontinued
 					</f:facet>
 				</b:dataTableColumn>
+				
+				<b:dataTableColumn>
+					<f:facet name="header">Action</f:facet>
+					<b:navCommandLink outcome="productDetail.xhtml">
+						View Product Details
+						<f:param name="id" value="#{product.productID}"/>
+					</b:navCommandLink>
+				</b:dataTableColumn>	
+				
 			</b:dataTable>
 		</h:form>		
 		
