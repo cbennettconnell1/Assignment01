@@ -54,19 +54,12 @@
 					</h:outputText>
 				</b:dataTableColumn>				
 				
-				<b:dataTableColumn value="#{orders.shipper.companyName}">
-				<f:facet name="header">
-						Shipper
-					</f:facet>
-				</b:dataTableColumn>		
-				
 				<b:dataTableColumn>
-					<f:facet name="header">
-						Freight
-					</f:facet>
-					<h:outputText value="#{orders.freight}">
-						<f:convertNumber type="currency" />
-					</h:outputText>
+					<f:facet name="header">Action</f:facet>
+					<b:navCommandLink outcome="orderDetail.xhtml">
+						View Order Details
+						<f:param name="id" value="#{orders.orderID}"/>
+					</b:navCommandLink>
 				</b:dataTableColumn>
 								
 							
