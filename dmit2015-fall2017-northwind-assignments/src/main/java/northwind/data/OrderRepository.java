@@ -9,6 +9,12 @@ public class OrderRepository extends AbstractJpaRepository<Order>{
 	{
 		super(Order.class);
 	}
+	
+//	public Order findOne(int orderId)
+	//{
+		//return getEntityManager().createQuery("SELECT o FROM Order o WHERE o.orderID = :idValue",Order.class)
+	    
+	//}
 }
 	
 
