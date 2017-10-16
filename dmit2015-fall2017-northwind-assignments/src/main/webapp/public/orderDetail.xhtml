@@ -12,7 +12,7 @@
 	xmlns:b="http://bootsfaces.net/ui"
 	template="/WEB-INF/templates/bootsfaces-dashboard.xhtml">
 	
-	<ui:param name="title" value="Northwind - Orders" />
+	<ui:param name="title" value="Northwind - Order Details" />
 	
 	<ui:define name="externalstyles">
 	</ui:define>
@@ -22,27 +22,76 @@
 
 	<ui:define name="maincontent">
 		<f:metadata>
-			<f:viewParam name="id" value="#{orderController.currentSelectedOrderId}" />
+			<f:viewParam name="id" value="#{orderController.currentSelectedOrderId}"/>
 			<f:event listener="#{orderController.findOrder()}" type="preRenderView" />
 		</f:metadata>
-		
 		<b:messages id="messages"></b:messages>	
 		<h1>Sales Invoice</h1>
 		<h:form>
+			<b:panelGrid colSpans="6,6" size="sm">
+				<b:panel rendred="#{orderController.currentSelectedOrder != null}">
+					<f:facet name="heading">
+						Billing Address
+					</f:facet>
+					<h:outputText value="#{orderController.currentSelectedOrder.customer.companyName}" />
+					<br/>
+					<h:outputText value="#{orderController.currentSelectedOrder.customer.contactName}" />
+					<br/>
+					<h:outputText value="#{orderController.currentSelectedOrder.customer.contactTitle}" />
+					<br/>
+					<h:outputText value="#{orderController.currentSelectedOrder.customer.address}" />
+					<br/>
+					<h:outputText value="#{orderController.currentSelectedOrder.customer.city} #{orderController.currentSelectedOrder.customer.postalCode}" />
+					<br/>
+					<h:outputText value ="#{orderController.currentSelectedOrder.customer.country}"></h:outputText>
+				</b:panel>
+			</b:panelGrid>
+			
+			<b:panelGrid colSpans="6,6" size="sm">
+				<b:panel rendred="#{orderController.currentSelectedOrder != null}">
+					<f:facet name="heading">
+						Shipping Address
+					</f:facet>
+					<h:outputText value="#{orderController.currentSelectedOrder.customer.companyName}" />
+					<br/>
+					<h:outputText value="#{orderController.currentSelectedOrder.customer.address}" />
+					<br/>
+					<h:outputText value="#{orderController.currentSelectedOrder.customer.city} #{orderController.currentSelectedOrder.customer.postalCode}" />
+					<br/>
+					<h:outputText value ="#{orderController.currentSelectedOrder.customer.country}"></h:outputText>
+				</b:panel>
+			</b:panelGrid>
+			
+			
 			<b:panel rendred="#{orderController.currentSelectedOrder != null}">
-				<f:facet name="heading">
-				Billing Address
-				</f:facet>
-				<h:outputText value="#{orderController.currentSelectedOrder.customer.companyName}" />
-				<br/>
-				<h:outputText value="#{orderController.currentSelectedOrder.customer.contactName}" />
-				<br/>
-				<h:outputText value="#{orderController.currentSelectedOrder.employee.title}" />
-				<br/>
-				<h:outputText value="#{orderController.currentSelectedOrder.customer.address}" />
-				<br/>
-				<h:outputText value="#{orderController.currentSelectedOrder.customer.city} #" />
+					<f:facet name="heading">
+						Invoice Detail
+					</f:facet>
+					<b:inputText label="Customer ID" 
+					value="#{orderController.currentSelectedOrder.customer.customerID}" 
+					readonly="true" />
+					<b:inputText label="Order ID" 
+					value="#{orderController.currentSelectedOrder.orderID}" 
+					readonly="true" />
+					<b:inputText label="Order Date" 
+					value="#{orderController.currentSelectedOrder.orderDate}" 
+					readonly="true" />
+					<b:inputText label="Required Date" 
+					value="#{orderController.currentSelectedOrder.requiredDate}" 
+					readonly="true" />
+					<b:inputText label="Shipped Date" 
+					value="#{orderController.currentSelectedOrder.shippedDate}" 
+					readonly="true" />
+					<b:inputText label="Company Name" 
+					value="#{orderController.currentSelectedOrder.shipper.companyName}" 
+					readonly="true" />
+					<b:dataTable value="#{orderController.currentSelectedOrder.orderDetails}" var="od">
+						<b:dataTableColumn value="#{od.product.productID}"></b:dataTableColumn>
+					
+					</b:dataTable>
 			</b:panel>
+
+			
 		</h:form>	
 	</ui:define>
 
