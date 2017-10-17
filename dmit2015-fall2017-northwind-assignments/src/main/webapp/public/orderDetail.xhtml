@@ -67,28 +67,74 @@
 					<f:facet name="heading">
 						Invoice Detail
 					</f:facet>
-					<b:inputText label="Customer ID" 
-					value="#{orderController.currentSelectedOrder.customer.customerID}" 
-					readonly="true" />
-					<b:inputText label="Order ID" 
-					value="#{orderController.currentSelectedOrder.orderID}" 
-					readonly="true" />
-					<b:inputText label="Order Date" 
-					value="#{orderController.currentSelectedOrder.orderDate}" 
-					readonly="true" />
-					<b:inputText label="Required Date" 
-					value="#{orderController.currentSelectedOrder.requiredDate}" 
-					readonly="true" />
-					<b:inputText label="Shipped Date" 
-					value="#{orderController.currentSelectedOrder.shippedDate}" 
-					readonly="true" />
-					<b:inputText label="Company Name" 
-					value="#{orderController.currentSelectedOrder.shipper.companyName}" 
-					readonly="true" />
-					<b:dataTable value="#{orderController.currentSelectedOrder.orderDetails}" var="od">
-						<b:dataTableColumn value="#{od.product.productID}"></b:dataTableColumn>
+					<b:column col-xs="6" col-md="6">
+						<b:inputText label="Customer ID" value="#{orderController.currentSelectedOrder.customer.customerID}" readonly="true" />
+					</b:column>
+					<b:column col-xs="6" col-md="6">
+						<b:inputText label="Order ID" value="#{orderController.currentSelectedOrder.orderID}" readonly="true" />
+					</b:column>
+					<b:column col-xs="6" col-md="3">
+						<b:inputText label="Order Date" value="#{orderController.currentSelectedOrder.orderDate}" readonly="true" />
+					</b:column>
+					<b:column col-xs="6" col-md="3">
+						<b:inputText label="Required Date" value="#{orderController.currentSelectedOrder.requiredDate}" readonly="true" />
+					</b:column>
+					<b:column col-xs="6" col-md="3">
+						<b:inputText label="Shipped Date" value="#{orderController.currentSelectedOrder.shippedDate}" readonly="true" />
+					</b:column>
+					<b:column col-xs="6" col-md="3">
+						<b:inputText label="Company Name" value="#{orderController.currentSelectedOrder.shipper.companyName}" readonly="true" />
+					</b:column>
 					
+					
+					<b:dataTable value="#{orderController.currentSelectedOrder.orderDetails}" var="od"
+					 searching="false">
+						<b:dataTableColumn value="#{od.product.productID}"></b:dataTableColumn>
+						<b:dataTableColumn value="#{od.product.productName}"></b:dataTableColumn>
+						<b:dataTableColumn>
+							<f:facet name="header">
+						     Quantity
+							</f:facet>
+	 						<h:outputText value="#{od.quantity}" style="float:right">
+								<f:convertNumber type="percent"/>
+							</h:outputText>
+						</b:dataTableColumn>
+						<b:dataTableColumn>
+							<f:facet name="header">
+						     Discount
+							</f:facet>
+	 						<h:outputText value="#{od.discount}" style="float:right">
+								<f:convertNumber type="percent"/>
+							</h:outputText>
+						</b:dataTableColumn>
+						<b:dataTableColumn >
+							<f:facet name="header">
+						     Unit Price
+							</f:facet>
+	 						<h:outputText value="#{od.unitPrice}" style="float:right">
+								<f:convertNumber type="currency"/>
+							</h:outputText>
+						</b:dataTableColumn>
+						<b:dataTableColumn>
+							<f:facet name="header">
+						     Extended Price
+							</f:facet>
+	 						<h:outputText value="#{od.quantity * od.unitPrice}" style="float:right">
+								<f:convertNumber type="currency"/>
+							</h:outputText>
+						</b:dataTableColumn>
+						
+						<b:column col-xs="6" col-md="3">
+						
+					</b:column>
+					<b:column col-xs="6" col-md="3">
+						<b:inputText label="Company Name" value="#{orderController.currentSelectedOrder.shipper.companyName}" readonly="true" />
+					</b:column>
+					<b:column col-xs="6" col-md="3">
+						<b:inputText label="Company Name" value="#{orderController.currentSelectedOrder.shipper.companyName}" readonly="true" />
+					</b:column>
 					</b:dataTable>
+					
 			</b:panel>
 
 			
