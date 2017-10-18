@@ -49,6 +49,10 @@
 						<f:param name="id" value="#{employee.employeeID}"></f:param>
 						view detail
 					</b:navCommandLink>
+					<b:navCommandLink outcome="ordersByEmployee.xhtml">
+						<f:param name="id" value="#{employee.employeeID}"></f:param>
+						view order
+					</b:navCommandLink>
 				</b:dataTableColumn>					
 				
 				</b:dataTable>
