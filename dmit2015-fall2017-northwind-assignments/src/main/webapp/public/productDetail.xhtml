@@ -30,7 +30,7 @@
 		<b:messages id="messages"></b:messages>	
 		<h1>Product Detail</h1>
 		<h:form>
-			<b:panel rendred="#{productController.currentSelectedProduct != null}">
+			<b:panelgrid rendred="#{productController.currentSelectedProduct != null}">
 			
 				<h:outputLabel value="Product ID: " />
 				<h:outputText value="#{productController.currentSelectedProduct.productID}"/>
@@ -73,7 +73,7 @@
 				<h:outputLabel value="Discontinued:" />
 				<h:selectBooleanCheckbox value="#{(productController.currentSelectedProduct.discontinued == 0) ? 'false':'true'}"/>
 				<br/>
-			</b:panel>
+			</b:panelgrid>
 		</h:form>
 		
 	</ui:define>

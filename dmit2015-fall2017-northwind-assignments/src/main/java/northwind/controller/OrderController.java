@@ -11,6 +11,7 @@ import org.omnifaces.util.Messages;
 
 import northwind.data.OrderRepository;
 import northwind.model.Order;
+import northwind.model.OrderDetail;
 
 @Model   //needed this*****
 public class OrderController {
@@ -64,6 +65,15 @@ public class OrderController {
 		return currentSelectedOrder;
 	}
 	
+	public double findSubTotal()
+	{
+		double subtotal = 0;
+		for(OrderDetail od :currentSelectedOrder.getOrderDetails()) {
+			subtotal += od.getUnitPrice().doubleValue() * od.getQuantity();
+		}
+		return subtotal;
+	}
+
 	
 }
 

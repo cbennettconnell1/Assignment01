@@ -96,7 +96,6 @@
 						     Quantity
 							</f:facet>
 	 						<h:outputText value="#{od.quantity}" style="float:right">
-								<f:convertNumber type="percent"/>
 							</h:outputText>
 						</b:dataTableColumn>
 						<b:dataTableColumn>
@@ -124,17 +123,17 @@
 							</h:outputText>
 						</b:dataTableColumn>
 						
-						<b:column col-xs="6" col-md="3">
-						
-					</b:column>
-					<b:column col-xs="6" col-md="3">
-						<b:inputText label="Company Name" value="#{orderController.currentSelectedOrder.shipper.companyName}" readonly="true" />
-					</b:column>
-					<b:column col-xs="6" col-md="3">
-						<b:inputText label="Company Name" value="#{orderController.currentSelectedOrder.shipper.companyName}" readonly="true" />
-					</b:column>
 					</b:dataTable>
 					
+					<b:column col-xs="6" col-md="3">
+						<b:inputText label="Sub Total" value="#{orderController.findSubTotal()}" readonly="true" />
+					</b:column>
+					<b:column col-xs="6" col-md="3">
+						<b:inputText label="Company Name" value="#{orderController.currentSelectedOrder.shipper.companyName}" readonly="true" />
+					</b:column>
+					<b:column col-xs="6" col-md="3">
+						<b:inputText label="Company Name" value="#{orderController.currentSelectedOrder.shipper.companyName}" readonly="true" />
+					</b:column>
 			</b:panel>
 
 			
