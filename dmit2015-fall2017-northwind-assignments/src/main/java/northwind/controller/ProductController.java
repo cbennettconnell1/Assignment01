@@ -102,9 +102,7 @@ public class ProductController {
 	public Product getCurrentSelectedProduct() {
 		return currentSelectedProduct;
 	}
-	
-	
-	
+
 	
 	
 	
