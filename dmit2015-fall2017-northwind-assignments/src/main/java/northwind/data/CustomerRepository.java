@@ -1,5 +1,7 @@
 package northwind.data;
 
+
+
 import northwind.model.Customer;
 
 public class CustomerRepository extends AbstractJpaRepository<Customer> {
