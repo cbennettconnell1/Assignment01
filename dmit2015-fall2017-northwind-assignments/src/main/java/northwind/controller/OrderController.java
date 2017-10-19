@@ -81,6 +81,51 @@ public class OrderController {
 	}
 
 	
+
+	
+	
+	//order by customer
+	private List<Order> orderByCustomer;   //getter
+	private String currentSelectedCustomerID; //getter/setter
+
+	public void findOrdersbyCustomer() 
+	{
+		if(!FacesContext.getCurrentInstance().isPostback())
+		{
+			if(currentSelectedCustomerID != null)
+			{
+				orderByCustomer = orderRepository.findAllByCustomerId(currentSelectedCustomerID);
+				if(orderByCustomer == null)
+				{
+					Messages.addGlobalInfo("There are no orders for specified customerId {0}",currentSelectedCustomerID);					
+				}
+			}
+			else
+			{
+				Messages.addGlobalError("Bad request. A valid CustomerID is required");
+			}
+		}
+	}
+
+	public String getCurrentSelectedCustomerID() {
+		return currentSelectedCustomerID;
+	}
+
+	public void setCurrentSelectedCustomerID(String currentSelectedCustomerID) {
+		this.currentSelectedCustomerID = currentSelectedCustomerID;
+	}
+
+	public List<Order> getOrderByCustomer() {
+		return orderByCustomer;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }
 
 

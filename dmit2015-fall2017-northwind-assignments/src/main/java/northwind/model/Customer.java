@@ -167,4 +167,12 @@ public class Customer implements Serializable {
 		return order;
 	}
 
+	@Override
+	public String toString() {
+		return "Customer [customerID=" + customerID + ", address=" + address + ", city=" + city + ", companyName="
+				+ companyName + ", contactName=" + contactName + ", contactTitle=" + contactTitle + ", country="
+				+ country + ", fax=" + fax + ", phone=" + phone + ", postalCode=" + postalCode + ", region=" + region
+				+ ", orders=" + orders + "]";
+	}	
+
 }
