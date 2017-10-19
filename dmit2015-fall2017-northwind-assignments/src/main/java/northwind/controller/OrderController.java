@@ -65,6 +65,7 @@ public class OrderController {
 	}
 	
 	
+
 	
 	
 	//order by customer
@@ -101,7 +102,6 @@ public class OrderController {
 	public List<Order> getOrderByCustomer() {
 		return orderByCustomer;
 	}
-	
 	
 	
 	
