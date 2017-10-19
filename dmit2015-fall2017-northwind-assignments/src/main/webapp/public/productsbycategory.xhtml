@@ -26,7 +26,7 @@
 			<f:viewParam name="id" value="#{productController.currentSelectedCategoryId}" />
 			<f:event listener="#{productController.findProductsbyCategory()}" type="preRenderView" />
 		</f:metadata>
-		<h1> Products for #{param.categoryId}</h1>
+		<h1> #{param.categoryName}</h1>
 		
 		<b:messages id="messages"></b:messages>	
 		<h:form>
