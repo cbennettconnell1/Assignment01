@@ -28,7 +28,7 @@
 		<b:messages id="messages"></b:messages>	
 		<h1>Sales Invoice</h1>
 		<h:form>
-			<b:panelGrid colSpans="6,6" size="sm">
+			<b:panelGrid colSpans="6,6" size="sm" >
 				<b:panel rendred="#{orderController.currentSelectedOrder != null}">
 					<f:facet name="heading">
 						Billing Address
@@ -45,9 +45,6 @@
 					<br/>
 					<h:outputText value ="#{orderController.currentSelectedOrder.customer.country}"></h:outputText>
 				</b:panel>
-			</b:panelGrid>
-			
-			<b:panelGrid colSpans="6,6" size="sm">
 				<b:panel rendred="#{orderController.currentSelectedOrder != null}">
 					<f:facet name="heading">
 						Shipping Address
@@ -60,7 +57,23 @@
 					<br/>
 					<h:outputText value ="#{orderController.currentSelectedOrder.customer.country}"></h:outputText>
 				</b:panel>
+				
 			</b:panelGrid>
+			
+		<!-- 	<b:panelGrid colSpans="6,6" size="sm">
+				<b:panel rendred="#{orderController.currentSelectedOrder != null}">
+					<f:facet name="heading">
+						Shipping Address
+					</f:facet>
+					<h:outputText value="#{orderController.currentSelectedOrder.customer.companyName}" />
+					<br/>
+					<h:outputText value="#{orderController.currentSelectedOrder.customer.address}" />
+					<br/>
+					<h:outputText value="#{orderController.currentSelectedOrder.customer.city} #{orderController.currentSelectedOrder.customer.postalCode}" />
+					<br/>
+					<h:outputText value ="#{orderController.currentSelectedOrder.customer.country}"></h:outputText>
+				</b:panel>
+			</b:panelGrid> -->
 			
 			
 			<b:panel rendred="#{orderController.currentSelectedOrder != null}">
@@ -74,13 +87,19 @@
 						<b:inputText label="Order ID" value="#{orderController.currentSelectedOrder.orderID}" readonly="true" />
 					</b:column>
 					<b:column col-xs="6" col-md="3">
-						<b:inputText label="Order Date" value="#{orderController.currentSelectedOrder.orderDate}" readonly="true" />
+						<b:inputText label="Order Date" value="#{orderController.currentSelectedOrder.orderDate}" readonly="true">
+							<f:convertDateTime pattern="yyyy-MM-dd"/>
+						</b:inputText>
 					</b:column>
 					<b:column col-xs="6" col-md="3">
-						<b:inputText label="Required Date" value="#{orderController.currentSelectedOrder.requiredDate}" readonly="true" />
+						<b:inputText label="Required Date" value="#{orderController.currentSelectedOrder.requiredDate}" readonly="true">
+							<f:convertDateTime pattern="yyyy-MM-dd"/>
+						</b:inputText>
 					</b:column>
 					<b:column col-xs="6" col-md="3">
-						<b:inputText label="Shipped Date" value="#{orderController.currentSelectedOrder.shippedDate}" readonly="true" />
+						<b:inputText label="Shipped Date" value="#{orderController.currentSelectedOrder.shippedDate}" readonly="true">
+							<f:convertDateTime pattern="yyyy-MM-dd"/>
+						</b:inputText>
 					</b:column>
 					<b:column col-xs="6" col-md="3">
 						<b:inputText label="Company Name" value="#{orderController.currentSelectedOrder.shipper.companyName}" readonly="true" />
@@ -126,14 +145,20 @@
 					</b:dataTable>
 					
 					<b:column col-xs="6" col-md="3">
-						<b:inputText label="Sub Total" value="#{orderController.findSubTotal()}" readonly="true" />
+						<b:inputText label="Sub Total" value="#{orderController.findSubTotal()}" readonly="true">
+							<f:convertNumber type="currency"/>
+						</b:inputText>
 					</b:column>
 					<b:column col-xs="6" col-md="3">
-						<b:inputText label="Company Name" value="#{orderController.currentSelectedOrder.shipper.companyName}" readonly="true" />
+						<b:inputText label="Freight" value="#{orderController.currentSelectedOrder.freight}" readonly="true">
+							<f:convertNumber type="currency"/>
+						</b:inputText>
 					</b:column>
-					<b:column col-xs="6" col-md="3">
-						<b:inputText label="Company Name" value="#{orderController.currentSelectedOrder.shipper.companyName}" readonly="true" />
-					</b:column>
+					 <b:column col-xs="6" col-md="3">
+						<b:inputText label="Total" value="#{orderController.Total()}" readonly="true">
+							<f:convertNumber type="currency"/>
+						</b:inputText>
+					</b:column> 
 			</b:panel>
 
 			

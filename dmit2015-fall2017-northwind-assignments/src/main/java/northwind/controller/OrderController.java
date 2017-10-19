@@ -73,6 +73,12 @@ public class OrderController {
 		}
 		return subtotal;
 	}
+	
+	public double Total()
+	{
+		double freight = currentSelectedOrder.getFreight().doubleValue();
+		return findSubTotal() + freight;
+	}
 
 	
 }

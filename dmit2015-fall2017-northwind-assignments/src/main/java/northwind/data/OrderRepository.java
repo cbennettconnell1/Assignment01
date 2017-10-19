@@ -1,8 +1,4 @@
 package northwind.data;
-
-
-import java.util.List;
-
 import northwind.model.Order;
 
 public class OrderRepository extends AbstractJpaRepository<Order>{
