@@ -15,25 +15,6 @@ import northwind.model.Employee;
 @Model
 public class EmployeeController {
 	
-	private int currentSelectedEmployeeID;
-	private Employee currentSelectedEmployee;
-	
-	public void findEmployee() {
-		if( !FacesContext.getCurrentInstance().isPostback() ) {
-			if( currentSelectedEmployeeID > 0 ) {
-				currentSelectedEmployee = employeeRepository.find(currentSelectedEmployeeID);
-				if( currentSelectedEmployee == null ) {
-					Messages.addGlobalInfo("There is no employee with employeeID {0}", 
-							currentSelectedEmployeeID);
-				} else {
-					Messages.addGlobalInfo("Successfully retrieved employee info.");
-				}
-			} else {
-				Messages.addGlobalError("Invalid request. A valid employeeID is required.");
-			}
-		}		
-	}
-
 	@Inject
 	private EmployeeRepository employeeRepository;
 	
@@ -48,16 +29,40 @@ public class EmployeeController {
 		return employees;
 	}
 
-	public int getCurrentSelectedEmployeeID() {
-		return currentSelectedEmployeeID;
+	private int currentSelectedEmployeeId;   //getter/setter
+	private Employee currentSelectedEmployee;  //getter
+
+	public void findEmployee() 
+	{
+		if(!FacesContext.getCurrentInstance().isPostback())
+		{
+			if(currentSelectedEmployeeId > 0)
+			{
+				currentSelectedEmployee = employeeRepository.find(currentSelectedEmployeeId);
+				if(currentSelectedEmployee == null)
+				{
+					Messages.addGlobalInfo("There is no employee with employeeID {0}", currentSelectedEmployeeId);
+				}
+			}
+				else
+				{
+					Messages.addGlobalError("Bad request. A valid employeeID is required.");
+				}			
+		}
 	}
 
-	public void setCurrentSelectedEmployeeID(int currentSelectedEmployeeID) {
-		this.currentSelectedEmployeeID = currentSelectedEmployeeID;
+	public int getCurrentSelectedEmployeeId() {
+		return currentSelectedEmployeeId;
+	}
+
+	public void setCurrentSelectedEmployeeId(int currentSelectedEmployeeId) {
+		this.currentSelectedEmployeeId = currentSelectedEmployeeId;
 	}
 
 	public Employee getCurrentSelectedEmployee() {
 		return currentSelectedEmployee;
 	}
-		
+
+	
+	
 }

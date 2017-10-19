@@ -48,10 +48,12 @@
 					<b:navCommandLink outcome="employeeDetail.xhtml">
 						<f:param name="id" value="#{employee.employeeID}"></f:param>
 						view detail
-					</b:navCommandLink>
+					</b:navCommandLink><br/>
 					<b:navCommandLink outcome="ordersByEmployee.xhtml">
 						<f:param name="id" value="#{employee.employeeID}"></f:param>
+						<f:param name="firstName" value="#{employee.firstName} #{employee.lastName}"/>	
 						view order
+						
 					</b:navCommandLink>
 				</b:dataTableColumn>					
 				
@@ -60,3 +62,5 @@
 	</ui:define>
 
 </ui:composition>
+
+

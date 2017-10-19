@@ -23,25 +23,47 @@
 
 	<ui:define name="maincontent">
 		<f:metadata>
-			<f:viewParam name="id" 
-				value="#{employeeController.currentSelectedEmployeeID}" />
-			<f:event listener="#{employeeController.findOrdersByEmployee()}" 
-				type="preRenderView" />			
+			<f:viewParam name="id" value="#{orderController.currentSelectedEmployeeID}" />
+			<f:event listener="#{orderController.findOrdersbyEmployee()}" type="preRenderView" />			
 		</f:metadata>
-		<h1>Orders By #{param.firstName + ' ' + lastName}</h1>
+
 				
 		<b:messages id="messages"></b:messages>		
+		<h1>Orders by #{param.firstName}</h1>
 		
 		<h:form>
-			<b:dataTable value="#{employeeController.ordersByEmployee}" var="order">
-				<b:dataTableColumn value="#{order.orderID}">
+			<b:dataTable value="#{orderController.orderByEmployee}" var="orders"
+						rendered="#{not empty orderController.orderByEmployee}" sortOrder="ascending">
+				<b:dataTableColumn value="#{orders.orderID}">
 				</b:dataTableColumn>
-				<b:dataTableColumn value="#{order.customerID}">
+				
+				<b:dataTableColumn>
+						<f:facet name="header">
+									Customer
+						</f:facet>
+						<h:outputText value="#{orders.customer.companyName}" />
 				</b:dataTableColumn>	
-				<b:dataTableColumn value="#{order.employeeID}">
+				<b:dataTableColumn >
+						<f:facet name="header">
+							Employee
+						</f:facet>
+						<h:outputText value="#{orders.employee.firstName} #{orders.employee.lastName}" />
+				</b:dataTableColumn>	
+				<b:dataTableColumn>
+	 				<f:facet name="header">
+							Order Date
+					</f:facet>
+		 				<h:outputText value="#{orders.orderDate}" >
+							<f:convertDateTime pattern="yyyy-MM-dd"/>
+						</h:outputText>
 				</b:dataTableColumn>
-				<b:dataTableColumn value="#{order.orderDate}">
-				</b:dataTableColumn>			
+				<b:dataTableColumn>
+						<f:facet name="header">Action</f:facet>
+						<b:navCommandLink outcome="orderDetail.xhtml">
+							View Details
+							<f:param name="id" value="#{orders.orderID}"/>
+						</b:navCommandLink>
+					</b:dataTableColumn> 		
 			</b:dataTable>
 		</h:form>
 		
