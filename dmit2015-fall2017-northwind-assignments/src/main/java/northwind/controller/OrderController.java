@@ -121,6 +121,43 @@ public class OrderController {
 	
 	
 	
+	//Employee
+	private List<Order> orderByEmployee;   //getter
+	private int currentSelectedEmployeeID; //getter/setter
+
+	public void findOrdersbyEmployee() 
+	{
+		if(!FacesContext.getCurrentInstance().isPostback())
+		{
+			if(currentSelectedEmployeeID > 0)
+			{
+				orderByEmployee = orderRepository.findAllByEmployeeId(currentSelectedEmployeeID);
+				if(orderByEmployee == null)
+				{
+					Messages.addGlobalInfo("There are no orders for specified EmployeeId {0}",currentSelectedEmployeeID);					
+				}
+			}
+			else
+			{
+				Messages.addGlobalError("Bad request. A valid EmployeeID is required");
+			}
+		}
+	}
+
+	public int getCurrentSelectedEmployeeID() {
+		return currentSelectedEmployeeID;
+	}
+
+	public void setCurrentSelectedEmployeeID(int currentSelectedEmployeeID) {
+		this.currentSelectedEmployeeID = currentSelectedEmployeeID;
+	}
+
+	public List<Order> getOrderByEmployee() {
+		return orderByEmployee;
+	}
+	
+	
+	
 	
 	
 	

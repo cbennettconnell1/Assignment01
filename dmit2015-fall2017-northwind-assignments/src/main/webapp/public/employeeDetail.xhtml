@@ -22,11 +22,12 @@
 
 	<ui:define name="maincontent">
 		<f:metadata>
-			<f:viewParam name="id" value="#{employeeController.currentSelectedEmployeeID}" />
+			<f:viewParam name="id" value="#{employeeController.currentSelectedEmployeeId}" />
 			<f:event listener="#{employeeController.findEmployee()}" type="preRenderView" />
 		</f:metadata>
 	
 		<b:messages id="messages" />
+		<h1>Employee Detail</h1>
 	
 		<b:form id="employeeForm">
 			<b:panel collapsible="false" 
@@ -49,20 +50,23 @@
 					readonly="true" />
 				<b:inputText label="Birth Date" 
 					value="#{employeeController.currentSelectedEmployee.birthDate}" 
-					readonly="true" />
+					readonly="true" >
+						<f:convertDateTime pattern="yyyy-MM-dd"></f:convertDateTime>
+					</b:inputText>
 				<b:inputText label="Hire Date" 
 					value="#{employeeController.currentSelectedEmployee.hireDate}" 
-					readonly="true" />
+					readonly="true" >
+					<f:convertDateTime pattern="yyyy-MM-dd"></f:convertDateTime>
+					</b:inputText>
 				<b:inputText label="Address" 
 					value="#{employeeController.currentSelectedEmployee.address}" 
 					readonly="true" />
 				<b:inputText label="City" 
 					value="#{employeeController.currentSelectedEmployee.city}" 
 					readonly="true" />	
+			
 			</b:panel>
-		</b:form>	
-	
-				
+	</b:form>		
 	</ui:define>
 
 </ui:composition>
