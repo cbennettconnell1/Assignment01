@@ -26,6 +26,9 @@
 			<b:dataTable value ="#{categoryController.categories}" var="currentCategory">
 		
 				<b:dataTableColumn value="#{currentCategory.categoryID}">
+					<f:facet name="header">
+						ID
+					</f:facet>
 				</b:dataTableColumn>
 			
 				<b:dataTableColumn value="#{currentCategory.categoryName}" >
@@ -39,6 +42,7 @@
 					<b:navCommandLink outcome="productsbycategory.xhtml">
 						view products
 						<f:param name="id" value="#{currentCategory.categoryID}"/>
+						<f:param name="categoryName" value= "#{currentCategory.categoryName}"  />
 					</b:navCommandLink>
 				</b:dataTableColumn>		
 			</b:dataTable>

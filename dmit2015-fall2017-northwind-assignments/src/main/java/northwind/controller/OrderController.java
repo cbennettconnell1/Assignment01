@@ -11,6 +11,7 @@ import org.omnifaces.util.Messages;
 
 import northwind.data.OrderRepository;
 import northwind.model.Order;
+import northwind.model.OrderDetail;
 
 @Model   //needed this*****
 public class OrderController {
@@ -64,6 +65,21 @@ public class OrderController {
 		return currentSelectedOrder;
 	}
 	
+	public double findSubTotal()
+	{
+		double subtotal = 0;
+		for(OrderDetail od :currentSelectedOrder.getOrderDetails()) {
+			subtotal += od.getUnitPrice().doubleValue() * od.getQuantity();
+		}
+		return subtotal;
+	}
+	
+	public double Total()
+	{
+		double freight = currentSelectedOrder.getFreight().doubleValue();
+		return findSubTotal() + freight;
+	}
+
 	
 
 	
@@ -101,6 +117,43 @@ public class OrderController {
 
 	public List<Order> getOrderByCustomer() {
 		return orderByCustomer;
+	}
+	
+	
+	
+	//Employee
+	private List<Order> orderByEmployee;   //getter
+	private int currentSelectedEmployeeID; //getter/setter
+
+	public void findOrdersbyEmployee() 
+	{
+		if(!FacesContext.getCurrentInstance().isPostback())
+		{
+			if(currentSelectedEmployeeID > 0)
+			{
+				orderByEmployee = orderRepository.findAllByEmployeeId(currentSelectedEmployeeID);
+				if(orderByEmployee == null)
+				{
+					Messages.addGlobalInfo("There are no orders for specified EmployeeId {0}",currentSelectedEmployeeID);					
+				}
+			}
+			else
+			{
+				Messages.addGlobalError("Bad request. A valid EmployeeID is required");
+			}
+		}
+	}
+
+	public int getCurrentSelectedEmployeeID() {
+		return currentSelectedEmployeeID;
+	}
+
+	public void setCurrentSelectedEmployeeID(int currentSelectedEmployeeID) {
+		this.currentSelectedEmployeeID = currentSelectedEmployeeID;
+	}
+
+	public List<Order> getOrderByEmployee() {
+		return orderByEmployee;
 	}
 	
 	
