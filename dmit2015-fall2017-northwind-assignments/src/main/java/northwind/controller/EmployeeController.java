@@ -14,25 +14,25 @@ import northwind.model.Employee;
 
 @Model
 public class EmployeeController {
-	
+
 	@Inject
 	private EmployeeRepository employeeRepository;
-	
 	private List<Employee> employees;
 	
 	@PostConstruct
-	void init() {
+	void init()
+	{
 		employees = employeeRepository.findAll();
 	}
-
-	public List<Employee> getEmployees() {
+	public List<Employee> getEmployees()
+	{
 		return employees;
 	}
-
-	private int currentSelectedEmployeeId;   //getter/setter
-	private Employee currentSelectedEmployee;  //getter
-
-	public void findEmployee() 
+	
+	private int currentSelectedEmployeeId; //getter/setter
+	private Employee currentSelectedEmployee;//getter
+	
+	public void findOrder()
 	{
 		if(!FacesContext.getCurrentInstance().isPostback())
 		{
@@ -41,28 +41,25 @@ public class EmployeeController {
 				currentSelectedEmployee = employeeRepository.find(currentSelectedEmployeeId);
 				if(currentSelectedEmployee == null)
 				{
-					Messages.addGlobalInfo("There is no employee with employeeID {0}", currentSelectedEmployeeId);
+					Messages.addGlobalInfo("There is no order with Order ID{0}", currentSelectedEmployeeId);;
 				}
+			}else
+			{
+				Messages.addGlobalError("Bad Request.Invalid Order ID {0}", currentSelectedEmployeeId);		
 			}
-				else
-				{
-					Messages.addGlobalError("Bad request. A valid employeeID is required.");
-				}			
 		}
 	}
-
 	public int getCurrentSelectedEmployeeId() {
 		return currentSelectedEmployeeId;
 	}
-
 	public void setCurrentSelectedEmployeeId(int currentSelectedEmployeeId) {
 		this.currentSelectedEmployeeId = currentSelectedEmployeeId;
 	}
-
 	public Employee getCurrentSelectedEmployee() {
 		return currentSelectedEmployee;
 	}
-
 	
+	
+
 	
 }
