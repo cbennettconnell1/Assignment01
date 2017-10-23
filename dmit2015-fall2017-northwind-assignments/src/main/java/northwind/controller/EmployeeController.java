@@ -32,7 +32,7 @@ public class EmployeeController {
 	private int currentSelectedEmployeeId; //getter/setter
 	private Employee currentSelectedEmployee;//getter
 	
-	public void findOrder()
+	public void findEmployee()
 	{
 		if(!FacesContext.getCurrentInstance().isPostback())
 		{
@@ -41,7 +41,7 @@ public class EmployeeController {
 				currentSelectedEmployee = employeeRepository.find(currentSelectedEmployeeId);
 				if(currentSelectedEmployee == null)
 				{
-					Messages.addGlobalInfo("There is no order with Order ID{0}", currentSelectedEmployeeId);;
+					Messages.addGlobalInfo("There is no order with Order ID{0}", currentSelectedEmployeeId);
 				}
 			}else
 			{
