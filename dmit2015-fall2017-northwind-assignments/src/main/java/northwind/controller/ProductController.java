@@ -33,6 +33,7 @@ public class ProductController {
 	
 	
 	//Product By Category
+	//Returns Multiple Records using list in respository
 	private List<Product> productbyCategory; //getter
 	private int currentSelectedCategoryId;  //getter/setter
 	
@@ -70,6 +71,7 @@ public class ProductController {
 	
 	
 	//Product Details
+	// Returns a Single Result
 	private int currentSelectedProductId; //getter/setter
 	private Product currentSelectedProduct; //getter
 	
