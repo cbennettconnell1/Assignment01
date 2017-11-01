@@ -30,8 +30,7 @@ public class ProductController {
 	{
 		return products;
 	}
-	
-	
+		
 	//Product By Category
 	private List<Product> productbyCategory; //getter
 	private int currentSelectedCategoryId;  //getter/setter
@@ -47,20 +46,21 @@ public class ProductController {
 						{
 							Messages.addGlobalInfo("There are no products for categoryID {0}", currentSelectedCategoryId);
 						}
-			}else {
+			}
+			else 
+			{
 				Messages.addGlobalError("Bad Request. A valid categoryID is required");
 			}
 		}
 	}
-
 	public int getCurrentSelectedCategoryId() {
 		return currentSelectedCategoryId;
 	}
-
+	
 	public void setCurrentSelectedCategoryId(int currentSelectedCategoryId) {
 		this.currentSelectedCategoryId = currentSelectedCategoryId;
 	}
-
+	
 	public List<Product> getProductbyCategory() {
 		return productbyCategory;
 	}
