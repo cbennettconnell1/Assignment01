@@ -14,7 +14,7 @@
 	xmlns:hf="http://highfaces.org" 
 	template="/WEB-INF/templates/bootsfaces-dashboard.xhtml">
 	
-	<ui:param name="title" value="[put page title here]" />
+	<ui:param name="title" value="Category Sales" />
 	
 	<ui:define name="externalstyles">
 	</ui:define>
@@ -33,17 +33,33 @@
 				tickLabel="#{point.categoryName}"
 				dataLabel="{point.name} ({point.percentage:.1f} %) ({point.y})" />
 		</hf:chart>
-			
-		<hf:chart 
-			type="bar" 
-			value="#{categoryController.retrieveCategoriesSales()}" 
+			<br/>
+			<br/>
+		<hf:chart type="bar" title="Category Sales for 1997" xaxisLabel="Category" yaxisLabel="Sales Amount"> 
+			<hf:chartSerie 
+			name="Category Sales"
+			value="#{categoryController.retrieveCategoriesSales()}"
 			var="point"
-     		point="#{point.totalSales}" 
-     		title="Category Sales for 1997" 
+     		point="#{point.totalSales}"  
      		tickLabel="#{point.categoryName}"
-			dataLabel="{point.name}({point.x})" 
-			xaxisLabel="Category"/>
-
+     		dataLabel="({point.y})">
+			</hf:chartSerie>
+		</hf:chart>
+			<br/>
+			<br/>
+		<hf:chart type="column" title="Category Sales for 1997" xaxisLabel="Category" yaxisLabel="Sales Amount"
+		
+		>
+		<hf:chartSerie
+			name="Category Sales"
+			value="#{categoryController.retrieveCategoriesSales()}"
+			var="point"
+     		point="#{point.totalSales}"  
+     		tickLabel="#{point.categoryName}"
+     		dataLabel="({point.y})"/>
+			<hf:chartAxis position="s" tickAngle="-45"></hf:chartAxis>
+			
+		</hf:chart>
 			
 				
 	</ui:define>
