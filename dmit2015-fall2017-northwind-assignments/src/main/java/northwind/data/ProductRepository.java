@@ -40,11 +40,11 @@ public class ProductRepository extends AbstractJpaRepository<Product>{
 		public List<ProductSales> findProductSales()
 		{
 			return getEntityManager().createQuery(
-					"SELECT new northwind.report.ProductSales(p.productName,SUM(od.quantity * od.unitPrice * (1 - od.discount)))"
-					+ " FROM OrderDetail od,IN(od.Product) p "
+					"SELECT new northwind.report.ProductSales(c.categoryName,p.productName,SUM(od.quantity * od.unitPrice * (1 - od.discount))AS sale) "
+					+ " FROM Product p,IN(p.category) c,IN(p.orderDetails) od "
 					+ " WHERE YEAR(od.order.shippedDate) = :yearValue "
-				    + " GROUP BY p.productName "
-					+ " ORDER BY p.productName "		
+				    + " GROUP BY c.categoryName, p.productName "
+					+ " ORDER BY sale DESC"		
 					,ProductSales.class)
 			.setParameter("yearValue",1997)
 			.getResultList();

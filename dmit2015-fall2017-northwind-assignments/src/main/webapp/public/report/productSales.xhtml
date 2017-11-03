@@ -30,7 +30,7 @@
 		<h:form>
 			<b:dataTable value ="#{productController.retrieveProductSales()}" var="product">
 			
-				<b:dataTableColumn value="#{product.category.categoryName}" >
+				<b:dataTableColumn value="#{product.categoryName}" >
 				</b:dataTableColumn>
 			
 				<b:dataTableColumn value="#{product.productName}" >
@@ -40,7 +40,7 @@
 				<f:facet name="header">
 						Product Sales
 					</f:facet>
-					<h:outputText value="#{productController.orderDetails.retrieveProductSales()}">
+					<h:outputText value="#{product.productSales}">
 						<f:convertNumber type="currency" />
 					</h:outputText>
 				</b:dataTableColumn>
