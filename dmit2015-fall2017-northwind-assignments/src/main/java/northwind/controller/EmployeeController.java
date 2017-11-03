@@ -59,11 +59,7 @@ public class EmployeeController {
 	public Employee getCurrentSelectedEmployee() {
 		return currentSelectedEmployee;
 	}
-	
-	public List<Employee> getEmployeees() 
-	{
-		return employees;
-	}
+
 	
 	public List<EmployeeSales> retrieveEmployeeSales() 
 	{

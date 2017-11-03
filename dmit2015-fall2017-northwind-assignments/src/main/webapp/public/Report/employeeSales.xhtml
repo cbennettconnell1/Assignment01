@@ -24,31 +24,29 @@
 	<ui:define name="maincontent">
 		<h1>Employee Sales</h1>
 		
-		<hf:chart type="bar" title="Employee Sales for 1997">
-			<hf:chartSerie
+		<hf:chart type="bar"  title="Employee Sales for 1997">
+			<hf:chartSerie dataLabel="#{salary}"
 			   name="Employee Sales"
+			   value="#{employeeController.retrieveEmployeeSales()}"
+			   var="point"
+			   point="#{point.salary}" 
+			   tickLabel="#{point.firstName}">
+
+			</hf:chartSerie>	
+		</hf:chart>
+		
+		<hf:chart type="column"  title="Employee Sales for 1997">
+			<hf:chartSerie 
+			   name="Employee Sales"
+			   dataLabel="#{salary}"
 			   value="#{employeeController.retrieveEmployeeSales()}"
 			   var="point"
 			   point="#{point.salary}"
 			   tickLabel="#{point.firstName}">
 
 			</hf:chartSerie>	
-		</hf:chart>
-		
-		<hf:chart type="column" title="Employee Sales for 1997">
-			<hf:chartSerie
-			   name="Employee Sales"
-			   value="#{employeeController.retrieveEmployeeSales()}"
-			   var="point"
-			   point="#{point.salary}"
-			   tickLabel="#{point.firstName}">
-
-			</hf:chartSerie>	
-		</hf:chart>
-		
-			
-			
-			
+		</hf:chart> 
+					
 
 		<hf:chart type="pie" title="Employee Sales for 1997">
 			<hf:chartSerie

@@ -12,14 +12,16 @@ public class EmployeeRepository extends AbstractJpaRepository<Employee> {
 		super(Employee.class);
 	}
 	
-	public List<EmployeeSales>findEmployeeSales()
+	public List<EmployeeSales> findEmployeeSales()
 	{
 		return getEntityManager().createQuery(		
-		"SELECT new northwind.report.EmployeeSales(e.firstName, SUM(e.salary))"
-		+ "FROM Employee e"
-
+		"SELECT new northwind.report.EmployeeSales(CONCAT (e.firstName, e.lastName),SUM(od.quantity * od.unitPrice * (1 - od.discount))AS sales ) "
+		+ " FROM OrderDetail od, IN (od.order) o, IN (o.employee) e "
+		+ " WHERE YEAR(o.shippedDate) = :yearValue "
+		+ " GROUP BY e.employeeID"
+		+ " ORDER BY sales DESC"
 		, EmployeeSales.class)
-		.setMaxResults(10)
+		.setParameter("yearValue",1997)
 		.getResultList();
 											
 	}
