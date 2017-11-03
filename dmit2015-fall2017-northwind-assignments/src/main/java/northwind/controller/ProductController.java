@@ -11,6 +11,7 @@ import org.omnifaces.util.Messages;
 
 import northwind.data.ProductRepository;
 import northwind.model.Product;
+import northwind.report.ProductSales;
 
 @Model
 public class ProductController {
@@ -102,8 +103,13 @@ public class ProductController {
 	public Product getCurrentSelectedProduct() {
 		return currentSelectedProduct;
 	}
-
 	
+	//callout-products sales and top ten products
+	public List<Product> retrieveTopTenProducts() {
+		return productRepository.findTopTenProducts(); 
+	}
 	
-	
+	public List<ProductSales> retrieveProductSales() {
+		return productRepository.findProductSales(); 
+	}
 }
