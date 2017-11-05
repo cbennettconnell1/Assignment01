@@ -13,6 +13,7 @@ import northwind.data.OrderRepository;
 import northwind.model.Order;
 import northwind.model.OrderDetail;
 
+
 @Model   //needed this*****
 public class OrderController {
 	
@@ -31,6 +32,8 @@ public class OrderController {
 		return orders;
 	}
 
+	
+	
 	//Order Details
 	private int currentSelectedOrderId; //getter/setter
 	private Order currentSelectedOrder;//getter
