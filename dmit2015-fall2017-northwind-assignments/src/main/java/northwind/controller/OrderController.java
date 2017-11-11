@@ -1,5 +1,6 @@
 package northwind.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -160,6 +161,35 @@ public class OrderController {
 	}
 	
 	
+	//Date Range
+	private List<Order> orderbyDate; //getter
+	private Date startDate; //getter/setter
+	private Date endDate; //getter/setter
+	
+	public void findOrderbyDateRange()
+	{
+		orderbyDate = orderRepository.findbyDateRange(startDate, endDate);	
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public List<Order> getOrderbyDate() {
+		return orderbyDate;
+	}
 	
 	
 	

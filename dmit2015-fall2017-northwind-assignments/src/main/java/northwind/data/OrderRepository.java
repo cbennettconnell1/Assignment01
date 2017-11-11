@@ -1,4 +1,5 @@
 package northwind.data;
+import java.util.Date;
 import java.util.List;
 import northwind.model.Order;
 import northwind.report.MonthlySales;
@@ -45,6 +46,16 @@ public class OrderRepository extends AbstractJpaRepository<Order>{
 				.setParameter("startDate",1998)
 				.getResultList();
 		
+	}
+	
+	public List<Order> findbyDateRange(Date startDate,Date endDate)
+	{
+		List<Order> allOrders = getEntityManager().createQuery(
+				"SELECT o FROM Order o WHERE o.shippedDate BETWEEN :startDate AND :endDate",Order.class)
+				.setParameter("startDate", startDate)
+				.setParameter("endDate", endDate)
+				.getResultList();
+		return allOrders;
 	}
 }
 	

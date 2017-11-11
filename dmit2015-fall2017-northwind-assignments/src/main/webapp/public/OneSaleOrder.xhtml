@@ -1,0 +1,117 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:b="http://bootsfaces.net/ui"
+	template="/WEB-INF/templates/bootsfaces-dashboard.xhtml">
+	
+	<ui:param name="title" value="Northwind - Order Details" />
+	
+	<ui:define name="externalstyles">
+	</ui:define>
+	
+	<ui:define name="internalstyles">
+	</ui:define>
+
+	<ui:define name="maincontent">
+		<f:metadata>
+			<f:viewParam name="id" value="#{orderController.currentSelectedOrderId}"/>
+			<f:event listener="#{orderController.findOrder()}" type="preRenderView" />
+		</f:metadata>
+		<b:messages id="messages"></b:messages>	
+		<h1>Sales Invoice</h1>
+		<h:form>
+			<b:panelGrid colSpans="6,6" size="sm" >
+				<b:panel rendred="#{orderController.currentSelectedOrder != null}">
+					<f:facet name="heading">
+						Customer Details
+					</f:facet>
+					<h:outputText value="#{orderController.currentSelectedOrder.customer.companyName}" />
+					<br/>
+					<h:outputText value="#{orderController.currentSelectedOrder.customer.contactName}" />
+					<br/>
+					<h:outputText value="#{orderController.currentSelectedOrder.customer.contactTitle}" />
+					<br/>
+					<h:outputText value="#{orderController.currentSelectedOrder.customer.address}" />
+					<br/>
+					<h:outputText value="#{orderController.currentSelectedOrder.customer.city} #{orderController.currentSelectedOrder.customer.postalCode}" />
+					<br/>
+					<h:outputText value ="#{orderController.currentSelectedOrder.customer.country}"></h:outputText>
+				</b:panel>
+				
+				<b:panel rendred="#{orderController.currentSelectedOrder != null}">
+					<f:facet name="heading">
+						Order Details
+					</f:facet>
+					<h:outputText  value="#{orderController.currentSelectedOrder.customer.customerID}" />
+					<br/>
+					<h:outputText value="#{orderController.currentSelectedOrder.orderID}" />
+					<br/>
+					<h:outputText value="#{orderController.currentSelectedOrder.orderDate}" />
+					<br/>
+					<h:outputText value="#{orderController.currentSelectedOrder.shippedDate}" />
+					<br/>
+					<h:outputText value ="#{orderController.currentSelectedOrder.employee.firstName}" />
+					<br/>
+					<h:outputText value="#{orderController.currentSelectedOrder.freight}" />
+					<br/>
+					<h:outputText value="#{orderController.Total()}" />
+					<br/>
+				</b:panel>
+				
+			</b:panelGrid>
+			
+			
+			
+			<b:panel rendred="#{orderController.currentSelectedOrder != null}">
+					<b:dataTable value="#{orderController.currentSelectedOrder.orderDetails}" var="od"
+					 searching="false">
+						<b:dataTableColumn value="#{od.product.productID}"></b:dataTableColumn>
+						<b:dataTableColumn value="#{od.product.productName}"></b:dataTableColumn>
+						<b:dataTableColumn>
+							<f:facet name="header">
+						     Quantity
+							</f:facet>
+	 						<h:outputText value="#{od.quantity}" style="float:right">
+							</h:outputText>
+						</b:dataTableColumn>
+						<b:dataTableColumn>
+							<f:facet name="header">
+						     Discount
+							</f:facet>
+	 						<h:outputText value="#{od.discount}" style="float:right">
+								<f:convertNumber type="percent"/>
+							</h:outputText>
+						</b:dataTableColumn>
+						<b:dataTableColumn >
+							<f:facet name="header">
+						     Unit Price
+							</f:facet>
+	 						<h:outputText value="#{od.unitPrice}" style="float:right">
+								<f:convertNumber type="currency"/>
+							</h:outputText>
+						</b:dataTableColumn>
+						<b:dataTableColumn>
+							<f:facet name="header">
+						     Item Total
+							</f:facet>
+	 						<h:outputText value="#{od.quantity * od.unitPrice}" style="float:right">
+								<f:convertNumber type="currency"/>
+							</h:outputText>
+						</b:dataTableColumn>
+						
+					</b:dataTable>
+			</b:panel>
+
+			
+		</h:form>	
+	</ui:define>
+
+</ui:composition>
