@@ -11,17 +11,21 @@ public class CustomerService {
 
 	@Inject
 	private CustomerRepository customerRepository;
-	
-	public void createCustomer(String companyName,String customerID)
+
+	public void createCustomer(Customer newCustomer)
 	{
-		Customer currentCustomer = new Customer();
-		currentCustomer.setCompanyName(companyName);
-		currentCustomer.setCustomerID(customerID);
-		createCustomer(currentCustomer);
+		customerRepository.persist(newCustomer);
 	}
 	
-	public void createCustomer(Customer currentCustomer)
+	public void updateCustomer(Customer newCustomer)
 	{
-		customerRepository.persist(currentCustomer);
+		customerRepository.edit(newCustomer);
 	}
+	
+	public void removeCustomer(Customer newCustomer)
+	{
+		customerRepository.remove(newCustomer);
+	}
+	
+	
 }

@@ -1,12 +1,14 @@
 package northwind.controller;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.omnifaces.util.Messages;
 
@@ -15,8 +17,10 @@ import northwind.model.Order;
 import northwind.model.OrderDetail;
 
 
-@Model   //needed this*****
-public class OrderController {
+@SuppressWarnings("serial")
+@Named
+@ViewScoped
+public class OrderController implements Serializable {
 	
 	@Inject
 	private OrderRepository orderRepository;
@@ -169,6 +173,13 @@ public class OrderController {
 	public void findOrderbyDateRange()
 	{
 		orderbyDate = orderRepository.findbyDateRange(startDate, endDate);	
+		int Count = orderbyDate.size();
+		
+		if (orderbyDate.size() == 0) {
+			Messages.addGlobalError("There are not invoices between{0} and {1}", startDate, endDate);
+		} else {
+			Messages.addGlobalInfo("There are {0} orders from {1} to {2}", Count,startDate,endDate);
+		}
 	}
 
 	public Date getStartDate() {

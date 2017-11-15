@@ -40,7 +40,7 @@ public class OrderRepository extends AbstractJpaRepository<Order>{
 		return getEntityManager().createQuery(
 				"SELECT new northwind.report.MonthlySales(SUM(od.quantity * od.unitPrice * (1 - od.discount)))"
 				+ " FROM OrderDetail od"
-				+ " WHERE YEAR(od.order.shippedDate) = BETWEEN :startDate and :endDate"
+				+ " WHERE od.order.shippedDate = BETWEEN :startDate and :endDate"
 				,MonthlySales.class)
 				.setParameter("startDate",1996)
 				.setParameter("startDate",1998)
@@ -48,14 +48,15 @@ public class OrderRepository extends AbstractJpaRepository<Order>{
 		
 	}
 	
-	public List<Order> findbyDateRange(Date startDate,Date endDate)
+	
+	public List<Order> findbyDateRange(Date startDate, Date endDate)
 	{
-		List<Order> allOrders = getEntityManager().createQuery(
-				"SELECT o FROM Order o WHERE o.shippedDate BETWEEN :startDate AND :endDate",Order.class)
-				.setParameter("startDate", startDate)
-				.setParameter("endDate", endDate)
+		return  getEntityManager().createQuery(
+				"SELECT o FROM Order o WHERE o.orderDate BETWEEN :startdate AND :enddate",Order.class)
+				.setParameter("startdate", startDate)
+				.setParameter("enddate", endDate)
 				.getResultList();
-		return allOrders;
+		
 	}
 }
 	

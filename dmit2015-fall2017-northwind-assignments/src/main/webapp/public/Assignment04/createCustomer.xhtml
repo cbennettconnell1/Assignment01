@@ -28,14 +28,16 @@
 		</b:jumbotron>
 		<b:messages id="messages" />
 		<b:form>
-		<!-- Enter customer ID -->
-		<b:inputText id="customerID" placeholder="enter new customer ID"
-				value="#{customerController.customerID}" />
-			<b:inputText id="customerName" placeholder="enter new customer name"
-				value="#{customerController.customerName}" />
+	
+			<b:inputText id="customerID" placeholder="enter customer ID"
+				value="#{customerController.newCustomerID}" />
+				
+			<b:inputText id="companyName" placeholder="enter company name"
+				value="#{customerController.newCustomer.companyName}" />
+				
 			<b:commandButton value="Submit"
 				actionListener="#{customerController.createNewCustomer()}"
-				ajax="true" update="messages customerName"
+				ajax="false" 
 				look="primary" />					
 		</b:form>	
 	</ui:define>

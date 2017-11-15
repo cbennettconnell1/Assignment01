@@ -4,10 +4,11 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
+
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
-import org.hibernate.validator.constraints.NotBlank;
+
 import org.omnifaces.util.Messages;
 
 import northwind.data.CustomerRepository;
@@ -66,24 +67,21 @@ public class CustomerController {
 	}
 	
 	//New Customer
+
 	private Customer newCustomer = new Customer();
+	private String newCustomerID;
+
 	@Inject
 	private CustomerService customerService;
-	
-	@NotBlank(message="Company Name value is required")
-	private String companyName; //getter/setter
-	private String customerID;
-	
+
 	public void createNewCustomer()
 	{
 		try
 		{
-			newCustomer.setCompanyName(companyName);
-			newCustomer.setCustomerID(customerID);
+			Customer newCustomer = customerRepository.find(newCustomerID);
+			newCustomer.setCustomerID(newCustomerID);
 			customerService.createCustomer(newCustomer);
 			Messages.addGlobalInfo("Create Customer was SuccessFul");
-			companyName="";
-			
 		}
 		catch(Exception e)
 		{
@@ -92,20 +90,25 @@ public class CustomerController {
 		}
 	}
 
-	public String getCustomerName() {
-		return companyName;
+	
+	public Customer getNewCustomer() {
+		return newCustomer;
 	}
 
-	public void setCustomerName(String companyName) {
-		this.companyName = companyName;
+	public void setNewCustomer(Customer newCustomer) {
+		this.newCustomer = newCustomer;
 	}
 
-	public String getCustomerID() {
-		return customerID;
+	public String getNewCustomerID() {
+		return newCustomerID;
 	}
 
-	public void setCustomerID(String customerID) {
-		this.customerID = customerID;
+	public void setNewCustomerID(String newCustomerID) {
+		this.newCustomerID = newCustomerID;
 	}
+
+
+
+
 	
 }

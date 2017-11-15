@@ -41,9 +41,11 @@
 					<br/>
 					<h:outputText value="#{orderController.currentSelectedOrder.customer.address}" />
 					<br/>
-					<h:outputText value="#{orderController.currentSelectedOrder.customer.city} #{orderController.currentSelectedOrder.customer.postalCode}" />
+					<h:outputText value="#{orderController.currentSelectedOrder.customer.city} , #{orderController.currentSelectedOrder.customer.postalCode}" />
 					<br/>
 					<h:outputText value ="#{orderController.currentSelectedOrder.customer.country}"></h:outputText>
+					<br/>
+					<h:outputText value ="#{orderController.currentSelectedOrder.customer.phone}"></h:outputText>
 				</b:panel>
 				
 				<b:panel rendred="#{orderController.currentSelectedOrder != null}">
@@ -54,15 +56,23 @@
 					<br/>
 					<h:outputText value="#{orderController.currentSelectedOrder.orderID}" />
 					<br/>
-					<h:outputText value="#{orderController.currentSelectedOrder.orderDate}" />
+					<h:outputText value="#{orderController.currentSelectedOrder.orderDate}">
+						<f:convertDateTime pattern="MMM d, yyyy"/>
+					</h:outputText>
 					<br/>
-					<h:outputText value="#{orderController.currentSelectedOrder.shippedDate}" />
+					<h:outputText value="#{orderController.currentSelectedOrder.shippedDate}">
+						<f:convertDateTime pattern="MMM d, yyyy"/>
+					</h:outputText>
 					<br/>
-					<h:outputText value ="#{orderController.currentSelectedOrder.employee.firstName}" />
+					<h:outputText value ="#{orderController.currentSelectedOrder.employee.firstName} #{orderController.currentSelectedOrder.employee.lastName}" />
 					<br/>
-					<h:outputText value="#{orderController.currentSelectedOrder.freight}" />
+					<h:outputText value="#{orderController.currentSelectedOrder.freight}">
+						<f:convertNumber type="currency"/>
+					</h:outputText>
 					<br/>
-					<h:outputText value="#{orderController.Total()}" />
+					<h:outputText value="#{orderController.Total()}">
+						<f:convertNumber type="currency"/>
+					</h:outputText>
 					<br/>
 				</b:panel>
 				
@@ -74,7 +84,9 @@
 					<b:dataTable value="#{orderController.currentSelectedOrder.orderDetails}" var="od"
 					 searching="false">
 						<b:dataTableColumn value="#{od.product.productID}"></b:dataTableColumn>
+						
 						<b:dataTableColumn value="#{od.product.productName}"></b:dataTableColumn>
+						
 						<b:dataTableColumn>
 							<f:facet name="header">
 						     Quantity
@@ -82,14 +94,7 @@
 	 						<h:outputText value="#{od.quantity}" style="float:right">
 							</h:outputText>
 						</b:dataTableColumn>
-						<b:dataTableColumn>
-							<f:facet name="header">
-						     Discount
-							</f:facet>
-	 						<h:outputText value="#{od.discount}" style="float:right">
-								<f:convertNumber type="percent"/>
-							</h:outputText>
-						</b:dataTableColumn>
+						
 						<b:dataTableColumn >
 							<f:facet name="header">
 						     Unit Price
@@ -98,6 +103,25 @@
 								<f:convertNumber type="currency"/>
 							</h:outputText>
 						</b:dataTableColumn>
+						
+						<b:dataTableColumn>
+							<f:facet name="header">
+						     Discount(%)
+							</f:facet>
+	 						<h:outputText value="#{od.discount}" style="float:right">
+								<f:convertNumber type="percent"/>
+							</h:outputText>
+						</b:dataTableColumn>
+						
+						<b:dataTableColumn >
+							<f:facet name="header">
+						     Unit Price
+							</f:facet>
+	 						<h:outputText value="#{od.unitPrice}" style="float:right">
+								<f:convertNumber type="currency"/>
+							</h:outputText>
+						</b:dataTableColumn>
+						
 						<b:dataTableColumn>
 							<f:facet name="header">
 						     Item Total

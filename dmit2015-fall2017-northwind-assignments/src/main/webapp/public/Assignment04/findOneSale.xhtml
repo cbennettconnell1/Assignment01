@@ -23,26 +23,54 @@
 	</ui:define>
 
 	<ui:define name="maincontent">
+	
+		<b:messages id="messages" />
 		
 		<h:form id="form">
-			<b:panel title="Find Sale">
-				<b:datepicker  mode="popup-icon"  tiny-screen="one-fourth"
-					firstDay="1" value="#{orderController.startDate}" />
-					
-				<b:datepicker  mode="popup-icon"  tiny-screen="one-fourth"
-					firstDay="1" value="#{orderController.endDate}" />
-
-			<b:commandButton value="Search"
+			<b:column span="5">
+				<b:datepicker label="Start Date " value="#{orderController.startDate}" />
+			</b:column>
+			
+			<b:column span="5">		
+				<b:datepicker label="End Date " value="#{orderController.endDate}" />
+			</b:column>
+			
+			<b:column span="1">
+				<b:commandButton value="Search"
 					look="primary"
 					ajax="true"
-					update="form:orders"
+					update="orderSelectedPanel :messages"
 					actionListener="#{orderController.findOrderbyDateRange()}" />
-			</b:panel>
+			</b:column>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
 			
-		<p:outputPanel id="orders">
-			<b:dataTable value="#{orderController.orders}" var="order">
+		<p:outputPanel id="orderSelectedPanel">
+			<b:panel title="Orders by Date Range" rendered="#{not empty orderController.orderbyDate}">
+			<b:dataTable value="#{orderController.orderbyDate}" var="order">
 				<b:dataTableColumn value="#{order.orderID}">
-				
+				</b:dataTableColumn>
+				<b:dataTableColumn>
+					<f:facet name="header">
+								Order Date
+							</f:facet>
+							<h:outputText value="#{order.orderDate}">
+								<f:convertDateTime pattern="MMM d,yyyy"/>
+							</h:outputText>
+				</b:dataTableColumn>
+				<b:dataTableColumn>
+					<f:facet name="header">
+								Shipped Date
+							</f:facet>
+							<h:outputText value="#{order.shippedDate}">
+								<f:convertDateTime pattern="MMM d,yyyy"/>
+							</h:outputText>
+				</b:dataTableColumn>
+				<b:dataTableColumn value="#{order.customer.companyName}">
+				</b:dataTableColumn>
+				<b:dataTableColumn value="#{order.employee.firstName} #{order.employee.lastName}" >
 				</b:dataTableColumn>
 				<b:dataTableColumn>
 					<f:facet name="header">Action</f:facet>
@@ -52,6 +80,7 @@
 					</b:navCommandLink>
 				</b:dataTableColumn>
 			</b:dataTable>	
+			</b:panel>
 		</p:outputPanel>
 		</h:form>
 				

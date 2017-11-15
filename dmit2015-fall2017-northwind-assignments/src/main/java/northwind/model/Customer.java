@@ -3,7 +3,6 @@ package northwind.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
-import org.hibernate.validator.constraints.NotBlank;
 
 import java.util.List;
 
@@ -29,7 +28,6 @@ public class Customer implements Serializable {
 	@Column(name="City")
 	private String city;
 
-	@NotBlank(message="Company Name value is required.")
 	@Column(name="CompanyName")
 	private String companyName;
 
