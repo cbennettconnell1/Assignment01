@@ -28,13 +28,36 @@
 		</b:jumbotron>
 		<b:messages id="messages" />
 		<b:form>
-	
-			<b:inputText id="customerID" placeholder="enter customer ID"
-				value="#{customerController.newCustomerID}" />
+			<b:inputText  label="Company Name" placeholder="enter contact name"
+				value="#{customerController.newCustomer.contactName}" />
 				
-			<b:inputText id="companyName" placeholder="enter company name"
+			<b:inputText  label="Contact Name" placeholder="enter company name"
 				value="#{customerController.newCustomer.companyName}" />
 				
+			<b:inputText  label="Contact Title" placeholder="enter contact title"
+				value="#{customerController.newCustomer.contactTitle}" />
+				
+			<b:inputText  label="Address" placeholder="enter Address"
+				value="#{customerController.newCustomer.address}" />
+				
+			<b:inputText  label="City" placeholder="enter city"
+				value="#{customerController.newCustomer.city}" />
+				
+			<b:inputText  label="Region" placeholder="enter region"
+				value="#{customerController.newCustomer.region}" />
+			
+			<b:inputText  label="Postal Code" placeholder="enter postal code"
+				value="#{customerController.newCustomer.postalCode}" />
+				
+			<b:inputText  label="Country Name" placeholder="enter country name"
+				value="#{customerController.newCustomer.country}" />
+				
+			<b:inputText  label="Phone" placeholder="enter phone"
+				value="#{customerController.newCustomer.phone}" />
+				
+			<b:inputText  label="Fax" placeholder="enter fax"
+				value="#{customerController.newCustomer.fax}" />
+		
 			<b:commandButton value="Submit"
 				actionListener="#{customerController.createNewCustomer()}"
 				ajax="false" 

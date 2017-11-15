@@ -17,15 +17,5 @@ public class CustomerService {
 		customerRepository.persist(newCustomer);
 	}
 	
-	public void updateCustomer(Customer newCustomer)
-	{
-		customerRepository.edit(newCustomer);
-	}
-	
-	public void removeCustomer(Customer newCustomer)
-	{
-		customerRepository.remove(newCustomer);
-	}
-	
-	
+
 }

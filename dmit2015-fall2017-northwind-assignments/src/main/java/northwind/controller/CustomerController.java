@@ -1,13 +1,14 @@
 package northwind.controller;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Model;
 
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
-
+import javax.inject.Named;
 
 import org.omnifaces.util.Messages;
 
@@ -15,8 +16,10 @@ import northwind.data.CustomerRepository;
 import northwind.model.Customer;
 import northwind.service.CustomerService;
 
-@Model
-public class CustomerController {
+@SuppressWarnings("serial")
+@Named
+@ViewScoped
+public class CustomerController implements Serializable{
 
 	@Inject
 	private CustomerRepository customerRepository;
@@ -69,7 +72,6 @@ public class CustomerController {
 	//New Customer
 
 	private Customer newCustomer = new Customer();
-	private String newCustomerID;
 
 	@Inject
 	private CustomerService customerService;
@@ -78,8 +80,6 @@ public class CustomerController {
 	{
 		try
 		{
-			Customer newCustomer = customerRepository.find(newCustomerID);
-			newCustomer.setCustomerID(newCustomerID);
 			customerService.createCustomer(newCustomer);
 			Messages.addGlobalInfo("Create Customer was SuccessFul");
 		}
@@ -90,7 +90,6 @@ public class CustomerController {
 		}
 	}
 
-	
 	public Customer getNewCustomer() {
 		return newCustomer;
 	}
@@ -99,13 +98,7 @@ public class CustomerController {
 		this.newCustomer = newCustomer;
 	}
 
-	public String getNewCustomerID() {
-		return newCustomerID;
-	}
 
-	public void setNewCustomerID(String newCustomerID) {
-		this.newCustomerID = newCustomerID;
-	}
 
 
 
