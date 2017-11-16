@@ -37,6 +37,13 @@
 				<b:dataTableColumn value="#{currentCategory.description}" >
 				</b:dataTableColumn>
 				
+				<b:dataTableColumn label="Picture">
+					<o:graphicImage value="#{currentCategory.picture}" 
+						height="200px"
+						width="200px"
+						dataURI="true" />
+				</b:dataTableColumn>
+				
 				<b:dataTableColumn>
 					<f:facet name="header">Action</f:facet>
 					<b:navCommandLink outcome="productsbycategory.xhtml">

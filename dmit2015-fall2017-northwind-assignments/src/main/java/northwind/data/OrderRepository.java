@@ -1,10 +1,18 @@
 package northwind.data;
 import java.util.List;
+import java.util.logging.Logger;
+
+import javax.inject.Inject;
+import javax.persistence.NoResultException;
+
 import northwind.model.Order;
 import northwind.report.MonthlySales;
 
 public class OrderRepository extends AbstractJpaRepository<Order>{
 	private static final long serialVersionUID = 1L;
+	
+	@Inject
+	private Logger log;
 	
 	public OrderRepository() 
 	{
@@ -20,11 +28,25 @@ public class OrderRepository extends AbstractJpaRepository<Order>{
 	}
 	
 
-	public Order findOne(int orderId)
-	{
-		return getEntityManager().createQuery("SELECT o FROM Order o JOIN FETCH o.orderDetails WHERE o.orderID = :idValue",Order.class)
-	    .setParameter("idValue", orderId)
-	    .getSingleResult();
+	//public Order findOne(int orderId)
+	//{
+		//return getEntityManager().createQuery("SELECT o FROM Order o JOIN FETCH o.orderDetails WHERE o.orderID = :idValue",Order.class)
+	    //.setParameter("idValue", orderId)
+	    //.getSingleResult();
+	//}
+	
+	public Order findOne(int orderId) {
+		Order singleResult;
+		try {
+			singleResult = getEntityManager().createQuery(
+"SELECT ord FROM Order ord JOIN FETCH ord.orderLines WHERE ord.orderId =:idValue", Order.class)
+			.setParameter("idValue", orderId)
+			.getSingleResult();
+		} catch(NoResultException nre) {
+			singleResult = null;
+			log.info(nre.getMessage());
+		}
+		return singleResult;
 	}
 
 	

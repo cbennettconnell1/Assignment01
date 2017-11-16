@@ -1,11 +1,15 @@
 package northwind.controller;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
+import javax.validation.constraints.NotNull;
 
 import org.omnifaces.util.Messages;
 
@@ -14,8 +18,11 @@ import northwind.model.Order;
 import northwind.model.OrderDetail;
 
 
+@SuppressWarnings("serial")
+@Named
+@ViewScoped
 @Model   //needed this*****
-public class OrderController {
+public class OrderController implements Serializable{
 	
 	@Inject
 	private OrderRepository orderRepository;
@@ -157,13 +164,57 @@ public class OrderController {
 		return orderByEmployee;
 	}
 	
+	//assignment 4
+	private Integer currentSelectedCustomerId;
+	private List<Order> ordersByCustomer;
 	
+	@NotNull(message="OrderId field value is required")
+	//private Integer currentSelectedOrderId;
+	//private Order currentSelectedOrder;
 	
+	//public void findOrder() {
+		//if( !FacesContext.getCurrentInstance().isPostback() ) {
+			//if( currentSelectedOrderId > 0 ) {
+				//currentSelectedOrder = orderRepository.findOne(currentSelectedOrderId);
+				///if( currentSelectedOrder == null ) {
+					//Messages.addGlobalInfo("There is no order with orderID {0}", 
+							//currentSelectedOrderId);					
+				//}
+			//} else {
+				//Messages.addGlobalError("Bad request. Invalid orderID {0}", currentSelectedOrderId);
+			//}
+		//}
+	//}
 	
+	public void findOneOrder() {
+		currentSelectedOrder = orderRepository.findOne(currentSelectedOrderId);
+		if( currentSelectedOrder== null ) {
+			Messages.addGlobalInfo("There is no order with orderID {0}", currentSelectedOrderId);					
+		} else {
+			Messages.addGlobalInfo("We found 1 result with orderID {0}", currentSelectedOrderId);								
+		}
+	}
 	
-	
-	
-	
+	public void findOneOrder(int orderId) {
+		currentSelectedOrderId = orderId;
+		findOneOrder();
+	}
+
+	public Integer getCurrentSelectedCustomerId() {
+		return currentSelectedCustomerId;
+	}
+
+	public void setCurrentSelectedCustomerId(Integer currentSelectedCustomerId) {
+		this.currentSelectedCustomerId = currentSelectedCustomerId;
+	}
+
+	public List<Order> getOrdersByCustomer() {
+		return ordersByCustomer;
+	}
+
+	public void setCurrentSelectedOrderId(Integer currentSelectedOrderId) {
+		this.currentSelectedOrderId = currentSelectedOrderId;
+	}
 }
 
 
