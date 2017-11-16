@@ -1,6 +1,7 @@
 package northwind.controller;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -215,6 +216,45 @@ public class OrderController implements Serializable{
 	public void setCurrentSelectedOrderId(Integer currentSelectedOrderId) {
 		this.currentSelectedOrderId = currentSelectedOrderId;
 	}
+	
+	//Date Range
+		private List<Order> orderbyDate; //getter
+		private Date startDate; //getter/setter
+		private Date endDate; //getter/setter
+		
+		public void findOrderbyDateRange()
+		{
+			orderbyDate = orderRepository.findbyDateRange(startDate, endDate);	
+			int Count = orderbyDate.size();
+			
+			if (orderbyDate.size() == 0) {
+				Messages.addGlobalError("There are not invoices between{0} and {1}", startDate, endDate);
+			} else {
+				Messages.addGlobalInfo("There are {0} orders from {1} to {2}", Count,startDate,endDate);
+			}
+		}
+
+		public Date getStartDate() {
+			return startDate;
+		}
+
+		public void setStartDate(Date startDate) {
+			this.startDate = startDate;
+		}
+
+		public Date getEndDate() {
+			return endDate;
+		}
+
+		public void setEndDate(Date endDate) {
+			this.endDate = endDate;
+		}
+
+		public List<Order> getOrderbyDate() {
+			return orderbyDate;
+		}
+	
+	
 }
 
 

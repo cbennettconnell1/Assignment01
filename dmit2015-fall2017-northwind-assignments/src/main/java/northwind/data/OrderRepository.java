@@ -1,4 +1,5 @@
 package northwind.data;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -28,18 +29,12 @@ public class OrderRepository extends AbstractJpaRepository<Order>{
 	}
 	
 
-	//public Order findOne(int orderId)
-	//{
-		//return getEntityManager().createQuery("SELECT o FROM Order o JOIN FETCH o.orderDetails WHERE o.orderID = :idValue",Order.class)
-	    //.setParameter("idValue", orderId)
-	    //.getSingleResult();
-	//}
 	
 	public Order findOne(int orderId) {
 		Order singleResult;
 		try {
 			singleResult = getEntityManager().createQuery(
-"SELECT ord FROM Order ord JOIN FETCH ord.orderLines WHERE ord.orderId =:idValue", Order.class)
+"SELECT o FROM Order o JOIN FETCH o.orderDetails WHERE o.orderID = :idValue", Order.class)
 			.setParameter("idValue", orderId)
 			.getSingleResult();
 		} catch(NoResultException nre) {
@@ -67,6 +62,15 @@ public class OrderRepository extends AbstractJpaRepository<Order>{
 				,MonthlySales.class)
 				.setParameter("startDate",1996)
 				.setParameter("startDate",1998)
+				.getResultList();
+		
+	}
+	public List<Order> findbyDateRange(Date startDate, Date endDate)
+	{
+		return  getEntityManager().createQuery(
+				"SELECT o FROM Order o WHERE o.orderDate BETWEEN :startdate AND :enddate",Order.class)
+				.setParameter("startdate", startDate)
+				.setParameter("enddate", endDate)
 				.getResultList();
 		
 	}
