@@ -13,6 +13,7 @@ import northwind.data.EmployeeRepository;
 import northwind.model.Employee;
 import northwind.report.EmployeeSales;
 
+
 @Model
 public class EmployeeController {
 
@@ -60,11 +61,14 @@ public class EmployeeController {
 		return currentSelectedEmployee;
 	}
 
-	
+	//Reporting
 	public List<EmployeeSales> retrieveEmployeeSales() 
 	{
 		return employeeRepository.findEmployeeSales();
 	}
 
+	
+	
+	
 	
 }
