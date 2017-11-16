@@ -31,7 +31,7 @@
 		
 		<b:form inline="true">
 			<b:inputText id="queryValue"
-				value="#{orderController.currentSelectedOrderId}"
+				value="#{orderController.searchValue}"
 				label="Order ID *"
 				placeholder="enter orderId to search for">
 				<b:focus />
@@ -89,7 +89,7 @@
 									</h:outputText>
 									
 									<h:outputLabel value="Sales Total" />
-									<h:outputText value="#{orderController.currentSelectedOrder.order.total}">
+									<h:outputText value="#{orderController.currentSelectedOrder.order.total()}">
 										<f:convertNumber type="currency"/>
 									</h:outputText>
 								</b:panelGrid>
@@ -98,7 +98,7 @@
 					</b:row>
 					<br/>
 					<b:dataTable id="orderLineTable"
-					value="#{orderController.currentSelectedOrder.orderLines}"
+					value="#{orderController.currentSelectedOrder.orderDetails}"
 					var="item"
 					rendered="true"
 					searching="false"
