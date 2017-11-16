@@ -31,8 +31,6 @@ public class OrderController {
 	public List<Order> getOrders() {
 		return orders;
 	}
-
-	
 	
 	//Order Details
 	private int currentSelectedOrderId; //getter/setter
