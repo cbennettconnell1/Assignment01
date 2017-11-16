@@ -1,5 +1,7 @@
 package northwind.controller;
 
+import java.io.Serializable;
+
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -12,14 +14,24 @@ import org.omnifaces.util.Messages;
 import northwind.data.ProductRepository;
 import northwind.model.Product;
 import northwind.report.ProductSales;
+import northwind.service.ProductService;
 
+@SuppressWarnings("serial")
 @Model
-public class ProductController {
+public class ProductController implements Serializable {
 	
 	@Inject
 	private ProductRepository productRepository;
 	
+	@Inject
+	private ProductService productService;
+	
 	private List<Product> products;
+	
+	private Product currentNewProduct = new Product();
+	private Integer currentSelectedSupplierId;
+	private Integer currentCategoryId;
+	
 	
 	@PostConstruct
 	void init()
@@ -31,9 +43,36 @@ public class ProductController {
 	{
 		return products;
 	}
+	
 		
+	public Product getCurrentNewProduct() {
+		return currentNewProduct;
+	}
+
+	public void setCurrentNewProduct(Product currentNewProduct) {
+		this.currentNewProduct = currentNewProduct;
+	}
+
+	public Integer getCurrentSelectedSupplierId() {
+		return currentSelectedSupplierId;
+	}
+
+	public void setCurrentSelectedSupplierId(Integer currentSelectedSupplierId) {
+		this.currentSelectedSupplierId = currentSelectedSupplierId;
+	}
+	
+
+	public Integer getCurrentCategoryId() {
+		return currentCategoryId;
+	}
+
+	public void setCurrentCategoryId(Integer currentCategoryId) {
+		this.currentCategoryId = currentCategoryId;
+	}
+
+
 	//Product By Category
-	//Returns Multiple Records using list in respository
+	//Returns Multiple Records using list in repository
 	private List<Product> productbyCategory; //getter
 	private int currentSelectedCategoryId;  //getter/setter
 	
@@ -68,9 +107,6 @@ public class ProductController {
 	}
 	
 	
-	
-	
-	
 	//Product Details
 	// Returns a Single Result
 	private int currentSelectedProductId; //getter/setter
@@ -87,7 +123,8 @@ public class ProductController {
 					Messages.addGlobalInfo("There is no product with Product ID {0}",currentSelectedProductId);
 					
 				}
-			}else
+			}
+			else
 				{
 					Messages.addGlobalError("Bad Request. Invalid Product ID {0}", currentSelectedProductId);
 				}
@@ -106,7 +143,7 @@ public class ProductController {
 		return currentSelectedProduct;
 	}
 	
-	//callout-products sales and top ten products
+	//call out-products sales and top ten products
 	public List<Product> retrieveTopTenProducts() {
 		return productRepository.findTopTenProducts(); 
 	}
@@ -114,4 +151,17 @@ public class ProductController {
 	public List<ProductSales> retrieveProductSales() {
 		return productRepository.findProductSales(); 
 	}
+	
+	//create new product details 
+	public void createNewProduct() 
+	{
+		try {
+			productService.createProduct(currentNewProduct, currentSelectedSupplierId, currentCategoryId );
+			Messages.addGlobalInfo("Create product details was successful.");
+			currentNewProduct = new Product();
+		} catch(Exception e) {
+			Messages.addGlobalInfo("Create product details was not successful.");
+		}
+	}	
+	
 }

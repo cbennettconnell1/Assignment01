@@ -9,7 +9,6 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.validation.constraints.NotNull;
 
 import org.omnifaces.util.Messages;
 
@@ -170,7 +169,7 @@ public class OrderController implements Serializable{
 	private Integer currentSelectedCustomerId;
 	private List<Order> ordersByCustomer;
 	
-	@NotNull(message="OrderId field value is required")
+	//@NotNull(message="OrderId field value is required")
 	//private Integer currentSelectedOrderId;
 	//private Order currentSelectedOrder;
 	
@@ -217,6 +216,27 @@ public class OrderController implements Serializable{
 	public void setCurrentSelectedOrderId(Integer currentSelectedOrderId) {
 		this.currentSelectedOrderId = currentSelectedOrderId;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
 
 
