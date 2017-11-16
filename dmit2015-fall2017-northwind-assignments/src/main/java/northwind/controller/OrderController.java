@@ -169,24 +169,7 @@ public class OrderController implements Serializable{
 	private Integer currentSelectedCustomerId;
 	private List<Order> ordersByCustomer;
 	
-	//@NotNull(message="OrderId field value is required")
-	//private Integer currentSelectedOrderId;
-	//private Order currentSelectedOrder;
-	
-	//public void findOrder() {
-		//if( !FacesContext.getCurrentInstance().isPostback() ) {
-			//if( currentSelectedOrderId > 0 ) {
-				//currentSelectedOrder = orderRepository.findOne(currentSelectedOrderId);
-				///if( currentSelectedOrder == null ) {
-					//Messages.addGlobalInfo("There is no order with orderID {0}", 
-							//currentSelectedOrderId);					
-				//}
-			//} else {
-				//Messages.addGlobalError("Bad request. Invalid orderID {0}", currentSelectedOrderId);
-			//}
-		//}
-	//}
-	
+
 	public void findOneOrder() {
 		currentSelectedOrder = orderRepository.findOne(currentSelectedOrderId);
 		if( currentSelectedOrder== null ) {
