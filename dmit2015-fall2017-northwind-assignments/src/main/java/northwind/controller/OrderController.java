@@ -1,30 +1,15 @@
 package northwind.controller;
 
-import java.io.Serializable;
-<<<<<<< HEAD
-<<<<<<< HEAD
-import java.util.Date;
-=======
->>>>>>> refs/remotes/origin/master
-=======
-import java.util.Date;
->>>>>>> refs/remotes/origin/master
-import java.util.List;
 
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-<<<<<<< HEAD
-
-=======
-import javax.validation.constraints.NotNull;
->>>>>>> refs/remotes/origin/master
-
 import org.omnifaces.util.Messages;
-
 import northwind.data.OrderRepository;
 import northwind.model.Order;
 import northwind.model.OrderDetail;
@@ -33,7 +18,6 @@ import northwind.model.OrderDetail;
 @SuppressWarnings("serial")
 @Named
 @ViewScoped
-@Model   //needed this*****
 public class OrderController implements Serializable{
 	
 	@Inject
@@ -176,7 +160,7 @@ public class OrderController implements Serializable{
 		return orderByEmployee;
 	}
 	
-<<<<<<< HEAD
+
 	//assignment 4---
 	private Integer currentSelectedCustomerId;
 	private List<Order> ordersByCustomer;
@@ -228,102 +212,11 @@ public class OrderController implements Serializable{
 	public void setCurrentSelectedOrderId(Integer currentSelectedOrderId) {
 		this.currentSelectedOrderId = currentSelectedOrderId;
 	}
-<<<<<<< HEAD
-=======
-	//assignment 4
-	private Integer currentSelectedCustomerId;
-	private List<Order> ordersByCustomer;
->>>>>>> refs/remotes/origin/master
+
 	
-	@NotNull(message="OrderId field value is required")
-	//private Integer currentSelectedOrderId;
-	//private Order currentSelectedOrder;
 	
-<<<<<<< HEAD
-	//Date Range
-	private List<Order> orderbyDate; //getter
-	private Date startDate; //getter/setter
-	private Date endDate; //getter/setter
-=======
-	//public void findOrder() {
-		//if( !FacesContext.getCurrentInstance().isPostback() ) {
-			//if( currentSelectedOrderId > 0 ) {
-				//currentSelectedOrder = orderRepository.findOne(currentSelectedOrderId);
-				///if( currentSelectedOrder == null ) {
-					//Messages.addGlobalInfo("There is no order with orderID {0}", 
-							//currentSelectedOrderId);					
-				//}
-			//} else {
-				//Messages.addGlobalError("Bad request. Invalid orderID {0}", currentSelectedOrderId);
-			//}
-		//}
-	//}
->>>>>>> refs/remotes/origin/master
 	
-<<<<<<< HEAD
-	public void findOrderbyDateRange()
-	{
-		orderbyDate = orderRepository.findbyDateRange(startDate, endDate);	
-		int Count = orderbyDate.size();
-		
-		if (orderbyDate.size() == 0) {
-			Messages.addGlobalError("There are not invoices between{0} and {1}", startDate, endDate);
-		} else {
-			Messages.addGlobalInfo("There are {0} orders from {1} to {2}", Count,startDate,endDate);
-		}
-	}
 
-	public Date getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
-
-	public Date getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
-
-	public List<Order> getOrderbyDate() {
-		return orderbyDate;
-=======
-	public void findOneOrder() {
-		currentSelectedOrder = orderRepository.findOne(currentSelectedOrderId);
-		if( currentSelectedOrder== null ) {
-			Messages.addGlobalInfo("There is no order with orderID {0}", currentSelectedOrderId);					
-		} else {
-			Messages.addGlobalInfo("We found 1 result with orderID {0}", currentSelectedOrderId);								
-		}
-	}
-	
-	public void findOneOrder(int orderId) {
-		currentSelectedOrderId = orderId;
-		findOneOrder();
-	}
-
-	public Integer getCurrentSelectedCustomerId() {
-		return currentSelectedCustomerId;
-	}
-
-	public void setCurrentSelectedCustomerId(Integer currentSelectedCustomerId) {
-		this.currentSelectedCustomerId = currentSelectedCustomerId;
-	}
-
-	public List<Order> getOrdersByCustomer() {
-		return ordersByCustomer;
-	}
-
-	public void setCurrentSelectedOrderId(Integer currentSelectedOrderId) {
-		this.currentSelectedOrderId = currentSelectedOrderId;
->>>>>>> refs/remotes/origin/master
-	}
-=======
-	
 	//Date Range
 		private List<Order> orderbyDate; //getter
 		private Date startDate; //getter/setter
@@ -360,9 +253,7 @@ public class OrderController implements Serializable{
 		public List<Order> getOrderbyDate() {
 			return orderbyDate;
 		}
-	
-	
->>>>>>> refs/remotes/origin/master
+
 }
 
 

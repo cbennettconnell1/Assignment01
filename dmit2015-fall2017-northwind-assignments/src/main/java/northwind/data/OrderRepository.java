@@ -34,12 +34,7 @@ public class OrderRepository extends AbstractJpaRepository<Order>{
 		Order singleResult;
 		try {
 			singleResult = getEntityManager().createQuery(
-<<<<<<< HEAD
-"SELECT ord FROM Order ord JOIN FETCH ord.orderLines WHERE ord.orderId =:idValue", Order.class)
-
-=======
 "SELECT o FROM Order o JOIN FETCH o.orderDetails WHERE o.orderID = :idValue", Order.class)
->>>>>>> refs/remotes/origin/master
 			.setParameter("idValue", orderId)
 			.getSingleResult();
 		} catch(NoResultException nre) {
@@ -70,11 +65,7 @@ public class OrderRepository extends AbstractJpaRepository<Order>{
 				.getResultList();
 		
 	}
-<<<<<<< HEAD
-	
-	
-=======
->>>>>>> refs/remotes/origin/master
+
 	public List<Order> findbyDateRange(Date startDate, Date endDate)
 	{
 		return  getEntityManager().createQuery(
