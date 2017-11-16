@@ -28,11 +28,27 @@ public class OrderRepository extends AbstractJpaRepository<Order>{
 				.getResultList();
 	}
 	
+<<<<<<< HEAD
 	public Order findOne(int orderId) {
 		Order singleResult;
 		try {
 			singleResult = getEntityManager().createQuery(
 					"SELECT o FROM Order o JOIN FETCH o.orderDetails WHERE o.orderID = :idValue", Order.class)
+=======
+
+	//public Order findOne(int orderId)
+	//{
+		//return getEntityManager().createQuery("SELECT o FROM Order o JOIN FETCH o.orderDetails WHERE o.orderID = :idValue",Order.class)
+	    //.setParameter("idValue", orderId)
+	    //.getSingleResult();
+	//}
+	
+	public Order findOne(int orderId) {
+		Order singleResult;
+		try {
+			singleResult = getEntityManager().createQuery(
+"SELECT ord FROM Order ord JOIN FETCH ord.orderLines WHERE ord.orderId =:idValue", Order.class)
+>>>>>>> refs/remotes/origin/master
 			.setParameter("idValue", orderId)
 			.getSingleResult();
 		} catch(NoResultException nre) {
