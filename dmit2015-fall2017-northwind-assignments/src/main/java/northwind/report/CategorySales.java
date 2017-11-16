@@ -36,6 +36,4 @@ public class CategorySales {
 	public void setTotalSales(BigDecimal totalSales) {
 		this.totalSales = totalSales;
 	}
-
-	
 }

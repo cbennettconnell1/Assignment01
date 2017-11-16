@@ -1,18 +1,15 @@
 package northwind.controller;
 
-import java.io.Serializable;
-import java.util.List;
 
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.validation.constraints.NotNull;
-
 import org.omnifaces.util.Messages;
-
 import northwind.data.OrderRepository;
 import northwind.model.Order;
 import northwind.model.OrderDetail;
@@ -21,7 +18,6 @@ import northwind.model.OrderDetail;
 @SuppressWarnings("serial")
 @Named
 @ViewScoped
-@Model   //needed this*****
 public class OrderController implements Serializable{
 	
 	@Inject
@@ -38,8 +34,6 @@ public class OrderController implements Serializable{
 	public List<Order> getOrders() {
 		return orders;
 	}
-
-	
 	
 	//Order Details
 	private int currentSelectedOrderId; //getter/setter
@@ -166,11 +160,12 @@ public class OrderController implements Serializable{
 		return orderByEmployee;
 	}
 	
-	//assignment 4
+
+	//assignment 4---
 	private Integer currentSelectedCustomerId;
 	private List<Order> ordersByCustomer;
 	
-	@NotNull(message="OrderId field value is required")
+	/*@NotNull(message="OrderId field value is required")*/
 	//private Integer currentSelectedOrderId;
 	//private Order currentSelectedOrder;
 	
@@ -217,6 +212,48 @@ public class OrderController implements Serializable{
 	public void setCurrentSelectedOrderId(Integer currentSelectedOrderId) {
 		this.currentSelectedOrderId = currentSelectedOrderId;
 	}
+
+	
+	
+	
+
+	//Date Range
+		private List<Order> orderbyDate; //getter
+		private Date startDate; //getter/setter
+		private Date endDate; //getter/setter
+		
+		public void findOrderbyDateRange()
+		{
+			orderbyDate = orderRepository.findbyDateRange(startDate, endDate);	
+			int Count = orderbyDate.size();
+			
+			if (orderbyDate.size() == 0) {
+				Messages.addGlobalError("There are not invoices between{0} and {1}", startDate, endDate);
+			} else {
+				Messages.addGlobalInfo("There are {0} orders from {1} to {2}", Count,startDate,endDate);
+			}
+		}
+
+		public Date getStartDate() {
+			return startDate;
+		}
+
+		public void setStartDate(Date startDate) {
+			this.startDate = startDate;
+		}
+
+		public Date getEndDate() {
+			return endDate;
+		}
+
+		public void setEndDate(Date endDate) {
+			this.endDate = endDate;
+		}
+
+		public List<Order> getOrderbyDate() {
+			return orderbyDate;
+		}
+
 }
 
 
