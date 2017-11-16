@@ -12,7 +12,7 @@ public class OrderService {
 	@Inject
 	private OrderRepository orderRepository;
 	
-	public Order findByOrderId(int orderId) {
+	public Order findOneOrder(int orderId) {
 		return orderRepository.find(orderId);
 	}
 }

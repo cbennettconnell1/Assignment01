@@ -1,10 +1,12 @@
 package northwind.controller;
 
+
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -12,16 +14,19 @@ import javax.inject.Named;
 
 import org.omnifaces.util.Messages;
 
+
 import northwind.data.OrderRepository;
 import northwind.model.Order;
 import northwind.model.OrderDetail;
+import northwind.service.OrderService;
 
 
 @SuppressWarnings("serial")
 @Named
 @ViewScoped
-@Model   //needed this*****
 public class OrderController implements Serializable{
+	@Inject
+	private Logger log;
 	
 	@Inject
 	private OrderRepository orderRepository;
@@ -37,8 +42,6 @@ public class OrderController implements Serializable{
 	public List<Order> getOrders() {
 		return orders;
 	}
-
-	
 	
 	//Order Details
 	private int currentSelectedOrderId; //getter/setter
@@ -165,40 +168,95 @@ public class OrderController implements Serializable{
 		return orderByEmployee;
 	}
 	
-	//assignment 4
-	private Integer currentSelectedCustomerId;
-	private List<Order> ordersByCustomer;
+
+	//assignment 4---
+	@Inject 
+	private OrderService orderService;
 	
+<<<<<<< HEAD
+=======
+	@NotNull(message="OrderID field value is required.")
+	private Integer searchValue;		// +getter+setter
+
+>>>>>>> branch 'master' of https://github.com/cbennettconnell1/Assignment01.git
 
 	public void findOneOrder() {
-		currentSelectedOrder = orderRepository.findOne(currentSelectedOrderId);
-		if( currentSelectedOrder== null ) {
-			Messages.addGlobalInfo("There is no order with orderID {0}", currentSelectedOrderId);					
-		} else {
-			Messages.addGlobalInfo("We found 1 result with orderID {0}", currentSelectedOrderId);								
+		try {
+			currentSelectedOrder = orderService.findOneOrder(
+					searchValue);
+			if( currentSelectedOrder == null ) {
+				Messages.addGlobalInfo("We found 0 results for {0}",
+						searchValue);
+			} else {
+				Messages.addGlobalInfo("1 result for {0}", 
+						searchValue);				
+			}
+		} catch(Exception e) {
+			log.info(e.getMessage());
+			currentSelectedOrder = null;
+			Messages.addGlobalInfo("We found 0 results for {0}",
+					searchValue);
 		}
 	}
 	
-	public void findOneOrder(int orderId) {
-		currentSelectedOrderId = orderId;
-		findOneOrder();
+	public Integer getSearchValue() {
+		return searchValue;
 	}
 
-	public Integer getCurrentSelectedCustomerId() {
-		return currentSelectedCustomerId;
+	public void setSearchValue(Integer searchValue) {
+		this.searchValue = searchValue;
 	}
 
-	public void setCurrentSelectedCustomerId(Integer currentSelectedCustomerId) {
-		this.currentSelectedCustomerId = currentSelectedCustomerId;
-	}
 
-	public List<Order> getOrdersByCustomer() {
-		return ordersByCustomer;
-	}
+		//Date Range
+		private List<Order> orderbyDate; //getter
+		private Date startDate; //getter/setter
+		private Date endDate; //getter/setter
+		
+		public void findOrderbyDateRange()
+		{
+			orderbyDate = orderRepository.findbyDateRange(startDate, endDate);	
+			int Count = orderbyDate.size();
+			
+			if (orderbyDate.size() == 0) {
+				Messages.addGlobalError("There are not invoices between{0} and {1}", startDate, endDate);
+			} else {
+				Messages.addGlobalInfo("There are {0} orders from {1} to {2}", Count,startDate,endDate);
+			}
+		}
 
-	public void setCurrentSelectedOrderId(Integer currentSelectedOrderId) {
-		this.currentSelectedOrderId = currentSelectedOrderId;
+		public Date getStartDate() {
+			return startDate;
+		}
+
+		public void setStartDate(Date startDate) {
+			this.startDate = startDate;
+		}
+
+		public Date getEndDate() {
+			return endDate;
+		}
+
+		public void setEndDate(Date endDate) {
+			this.endDate = endDate;
+		}
+
+		public List<Order> getOrderbyDate() {
+			return orderbyDate;
+		}
+		
+		
+		
+		
+		/*	public void findOneOrder() {
+		currentSelectedOrder = orderRepository.findOne(currentSelectedOrderId);
+		if( currentSelectedOrder==0) {
+			Messages.addGlobalInfo("There is no order with orderID {0}", currentSelectedOrderId);					
+		} else {
+			Messages.addGlobalInfo("We found  result with orderID {0}", currentSelectedOrderId);								
+		}
 	}
+<<<<<<< HEAD
 	
 	
 	
@@ -220,6 +278,10 @@ public class OrderController implements Serializable{
 	
 	
 	
+=======
+	*/
+
+>>>>>>> branch 'master' of https://github.com/cbennettconnell1/Assignment01.git
 }
 
 
