@@ -22,6 +22,4 @@ public class TenMostExpensiveProducts {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	} 
-	
-
 }

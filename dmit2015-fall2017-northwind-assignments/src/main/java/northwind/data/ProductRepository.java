@@ -31,10 +31,14 @@ public class ProductRepository extends AbstractJpaRepository<Product>{
 		
 		//assignment3
 		//ten most expensive products
-		public List<Product> findTopTenProducts() {return 
-			getEntityManager().createQuery("SELECT p FROM Product p order by p.unitPrice DESC",Product.class)
+		public List<Product> findTopTenProducts() 
+		{
+			return getEntityManager().createQuery(
+					"SELECT p FROM Product p "
+				  + "order by p.unitPrice DESC",Product.class)
 				.setMaxResults(10)
-				.getResultList();}
+				.getResultList();
+		}
 		
 		//product sales
 		public List<ProductSales> findProductSales()
