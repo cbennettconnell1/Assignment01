@@ -2,8 +2,12 @@ package northwind.controller;
 
 import java.io.Serializable;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.util.Date;
 =======
+>>>>>>> refs/remotes/origin/master
+=======
+import java.util.Date;
 >>>>>>> refs/remotes/origin/master
 import java.util.List;
 
@@ -224,6 +228,7 @@ public class OrderController implements Serializable{
 	public void setCurrentSelectedOrderId(Integer currentSelectedOrderId) {
 		this.currentSelectedOrderId = currentSelectedOrderId;
 	}
+<<<<<<< HEAD
 =======
 	//assignment 4
 	private Integer currentSelectedCustomerId;
@@ -317,6 +322,47 @@ public class OrderController implements Serializable{
 		this.currentSelectedOrderId = currentSelectedOrderId;
 >>>>>>> refs/remotes/origin/master
 	}
+=======
+	
+	//Date Range
+		private List<Order> orderbyDate; //getter
+		private Date startDate; //getter/setter
+		private Date endDate; //getter/setter
+		
+		public void findOrderbyDateRange()
+		{
+			orderbyDate = orderRepository.findbyDateRange(startDate, endDate);	
+			int Count = orderbyDate.size();
+			
+			if (orderbyDate.size() == 0) {
+				Messages.addGlobalError("There are not invoices between{0} and {1}", startDate, endDate);
+			} else {
+				Messages.addGlobalInfo("There are {0} orders from {1} to {2}", Count,startDate,endDate);
+			}
+		}
+
+		public Date getStartDate() {
+			return startDate;
+		}
+
+		public void setStartDate(Date startDate) {
+			this.startDate = startDate;
+		}
+
+		public Date getEndDate() {
+			return endDate;
+		}
+
+		public void setEndDate(Date endDate) {
+			this.endDate = endDate;
+		}
+
+		public List<Order> getOrderbyDate() {
+			return orderbyDate;
+		}
+	
+	
+>>>>>>> refs/remotes/origin/master
 }
 
 
