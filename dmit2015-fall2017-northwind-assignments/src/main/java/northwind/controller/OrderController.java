@@ -4,21 +4,29 @@ package northwind.controller;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Logger;
+
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
 import org.omnifaces.util.Messages;
+
+
 import northwind.data.OrderRepository;
 import northwind.model.Order;
 import northwind.model.OrderDetail;
+import northwind.service.OrderService;
 
 
 @SuppressWarnings("serial")
 @Named
 @ViewScoped
 public class OrderController implements Serializable{
+	@Inject
+	private Logger log;
 	
 	@Inject
 	private OrderRepository orderRepository;
@@ -162,62 +170,45 @@ public class OrderController implements Serializable{
 	
 
 	//assignment 4---
-	private Integer currentSelectedCustomerId;
-	private List<Order> ordersByCustomer;
+	@Inject 
+	private OrderService orderService;
 	
-	/*@NotNull(message="OrderId field value is required")*/
-	//private Integer currentSelectedOrderId;
-	//private Order currentSelectedOrder;
-	
-	//public void findOrder() {
-		//if( !FacesContext.getCurrentInstance().isPostback() ) {
-			//if( currentSelectedOrderId > 0 ) {
-				//currentSelectedOrder = orderRepository.findOne(currentSelectedOrderId);
-				///if( currentSelectedOrder == null ) {
-					//Messages.addGlobalInfo("There is no order with orderID {0}", 
-							//currentSelectedOrderId);					
-				//}
-			//} else {
-				//Messages.addGlobalError("Bad request. Invalid orderID {0}", currentSelectedOrderId);
-			//}
-		//}
-	//}
-	
+<<<<<<< HEAD
+=======
+	@NotNull(message="OrderID field value is required.")
+	private Integer searchValue;		// +getter+setter
+
+>>>>>>> branch 'master' of https://github.com/cbennettconnell1/Assignment01.git
+
 	public void findOneOrder() {
-		currentSelectedOrder = orderRepository.findOne(currentSelectedOrderId);
-		if( currentSelectedOrder== null ) {
-			Messages.addGlobalInfo("There is no order with orderID {0}", currentSelectedOrderId);					
-		} else {
-			Messages.addGlobalInfo("We found 1 result with orderID {0}", currentSelectedOrderId);								
+		try {
+			currentSelectedOrder = orderService.findOneOrder(
+					searchValue);
+			if( currentSelectedOrder == null ) {
+				Messages.addGlobalInfo("We found 0 results for {0}",
+						searchValue);
+			} else {
+				Messages.addGlobalInfo("1 result for {0}", 
+						searchValue);				
+			}
+		} catch(Exception e) {
+			log.info(e.getMessage());
+			currentSelectedOrder = null;
+			Messages.addGlobalInfo("We found 0 results for {0}",
+					searchValue);
 		}
 	}
 	
-	public void findOneOrder(int orderId) {
-		currentSelectedOrderId = orderId;
-		findOneOrder();
+	public Integer getSearchValue() {
+		return searchValue;
 	}
 
-	public Integer getCurrentSelectedCustomerId() {
-		return currentSelectedCustomerId;
+	public void setSearchValue(Integer searchValue) {
+		this.searchValue = searchValue;
 	}
 
-	public void setCurrentSelectedCustomerId(Integer currentSelectedCustomerId) {
-		this.currentSelectedCustomerId = currentSelectedCustomerId;
-	}
 
-	public List<Order> getOrdersByCustomer() {
-		return ordersByCustomer;
-	}
-
-	public void setCurrentSelectedOrderId(Integer currentSelectedOrderId) {
-		this.currentSelectedOrderId = currentSelectedOrderId;
-	}
-
-	
-	
-	
-
-	//Date Range
+		//Date Range
 		private List<Order> orderbyDate; //getter
 		private Date startDate; //getter/setter
 		private Date endDate; //getter/setter
@@ -253,7 +244,44 @@ public class OrderController implements Serializable{
 		public List<Order> getOrderbyDate() {
 			return orderbyDate;
 		}
+		
+		
+		
+		
+		/*	public void findOneOrder() {
+		currentSelectedOrder = orderRepository.findOne(currentSelectedOrderId);
+		if( currentSelectedOrder==0) {
+			Messages.addGlobalInfo("There is no order with orderID {0}", currentSelectedOrderId);					
+		} else {
+			Messages.addGlobalInfo("We found  result with orderID {0}", currentSelectedOrderId);								
+		}
+	}
+<<<<<<< HEAD
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+=======
+	*/
 
+>>>>>>> branch 'master' of https://github.com/cbennettconnell1/Assignment01.git
 }
 
 
