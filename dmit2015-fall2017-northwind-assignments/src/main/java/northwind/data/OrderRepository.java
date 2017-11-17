@@ -34,7 +34,7 @@ public class OrderRepository extends AbstractJpaRepository<Order>{
 		Order singleResult;
 		try {
 			singleResult = getEntityManager().createQuery(
-"SELECT o FROM Order o JOIN FETCH o.orderDetails WHERE o.orderID = :idValue", Order.class)
+           "SELECT o FROM Order o  WHERE o.orderDetails.orderID = :idValue", Order.class)
 			.setParameter("idValue", orderId)
 			.getSingleResult();
 		} catch(NoResultException nre) {
