@@ -10,6 +10,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.omnifaces.util.Messages;
 
 import northwind.data.CustomerRepository;
@@ -70,7 +71,7 @@ public class CustomerController implements Serializable{
 	}
 	
 	//New Customer
-
+	@NotBlank(message="Company Name is required")
 	private Customer newCustomer = new Customer();
 
 	@Inject

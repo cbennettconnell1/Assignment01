@@ -32,7 +32,7 @@
 		<b:form>
 			<b:row>
 				<b:column span="11">
-					<b:selectOneMenu id="id" value="#{orderController.currentSelectedCustomerId}">
+					<b:selectOneMenu id="id" value="#{orderController.currentSelectedCustomerID}">
 						<f:selectItem itemLabel="Choose a Customer" itemValue="" noSelectionOption="true" />
 						<f:selectItems value="#{customerController.customers}" 
 							var="customer"
@@ -45,7 +45,7 @@
 						look="primary"
 						ajax="true"
 						update="queryResultListPanel :messages"
-						actionListener="#{orderController.orderByCustomer()}">
+						actionListener="#{orderController.findOrdersbyCustomer()}">
 					</b:commandButton>
 				</b:column>
 			</b:row>
@@ -85,22 +85,136 @@
 							<h:outputText value="#{order.employee.firstName} #{order.employee.firstName}">
 							</h:outputText>
 						</b:dataTableColumn>
-						
-						
-						
-						
-						
+						<b:dataTableColumn>
+							<f:facet name="header">
+								Action
+							</f:facet>
+							<b:commandButton value="view details" 
+								look="link"
+								actionListener="#{invoiceController.findOneInvoice(invoice.invoiceId)}"
+								ajax="true" update="querySingleResult queryForm:queryResultListPanel">
+							</b:commandButton>
+						</b:dataTableColumn>
 					</b:dataTable>
 				</b:panel>
 			</p:outputPanel>
-			
-	
-
-
-
-
-
 		</b:form>
+		
+		
+		<p:outputPanel id ="queryPanelResult">
+			<b:panelGrid colSpans="6,6" size="sm" >
+				<b:panel rendred="#{orderController.currentSelectedOrder != null}">
+					<f:facet name="heading">
+						Customer Details
+					</f:facet>
+					<h:outputText value="#{orderController.currentSelectedOrder.customer.companyName}" />
+					<br/>
+					<h:outputText value="#{orderController.currentSelectedOrder.customer.contactName}" />
+					<br/>
+					<h:outputText value="#{orderController.currentSelectedOrder.customer.contactTitle}" />
+					<br/>
+					<h:outputText value="#{orderController.currentSelectedOrder.customer.address}" />
+					<br/>
+					<h:outputText value="#{orderController.currentSelectedOrder.customer.city} , #{orderController.currentSelectedOrder.customer.postalCode}" />
+					<br/>
+					<h:outputText value ="#{orderController.currentSelectedOrder.customer.country}"></h:outputText>
+					<br/>
+					<h:outputText value ="#{orderController.currentSelectedOrder.customer.phone}"></h:outputText>
+				</b:panel>
+				
+				<b:panel rendred="#{orderController.currentSelectedOrder != null}">
+					<f:facet name="heading">
+						Order Details
+					</f:facet>
+					<h:outputText  value="#{orderController.currentSelectedOrder.customer.customerID}" />
+					<br/>
+					<h:outputText value="#{orderController.currentSelectedOrder.orderID}" />
+					<br/>
+					<h:outputText value="#{orderController.currentSelectedOrder.orderDate}">
+						<f:convertDateTime pattern="MMM d, yyyy"/>
+					</h:outputText>
+					<br/>
+					<h:outputText value="#{orderController.currentSelectedOrder.shippedDate}">
+						<f:convertDateTime pattern="MMM d, yyyy"/>
+					</h:outputText>
+					<br/>
+					<h:outputText value ="#{orderController.currentSelectedOrder.employee.firstName} #{orderController.currentSelectedOrder.employee.lastName}" />
+					<br/>
+					<h:outputText value="#{orderController.currentSelectedOrder.freight}">
+						<f:convertNumber type="currency"/>
+					</h:outputText>
+					<br/>
+					<h:outputText value="#{orderController.Total()}">
+						<f:convertNumber type="currency"/>
+					</h:outputText>
+					<br/>
+				</b:panel>
+				
+			</b:panelGrid>
+			
+			
+			
+			<b:panel rendred="#{orderController.currentSelectedOrder != null}">
+					<b:dataTable value="#{orderController.currentSelectedOrder.orderDetails}" var="od"
+					 searching="false">
+						<b:dataTableColumn value="#{od.product.productID}"></b:dataTableColumn>
+						
+						<b:dataTableColumn value="#{od.product.productName}"></b:dataTableColumn>
+						
+						<b:dataTableColumn>
+							<f:facet name="header">
+						     Quantity
+							</f:facet>
+	 						<h:outputText value="#{od.quantity}" style="float:right">
+							</h:outputText>
+						</b:dataTableColumn>
+						
+						<b:dataTableColumn >
+							<f:facet name="header">
+						     Unit Price
+							</f:facet>
+	 						<h:outputText value="#{od.unitPrice}" style="float:right">
+								<f:convertNumber type="currency"/>
+							</h:outputText>
+						</b:dataTableColumn>
+						
+						<b:dataTableColumn>
+							<f:facet name="header">
+						     Discount(%)
+							</f:facet>
+	 						<h:outputText value="#{od.discount}" style="float:right">
+								<f:convertNumber type="percent"/>
+							</h:outputText>
+						</b:dataTableColumn>
+						
+						<b:dataTableColumn >
+							<f:facet name="header">
+						     Unit Price
+							</f:facet>
+	 						<h:outputText value="#{od.unitPrice}" style="float:right">
+								<f:convertNumber type="currency"/>
+							</h:outputText>
+						</b:dataTableColumn>
+						
+						<b:dataTableColumn>
+							<f:facet name="header">
+						     Item Total
+							</f:facet>
+	 						<h:outputText value="#{od.quantity * od.unitPrice}" style="float:right">
+								<f:convertNumber type="currency"/>
+							</h:outputText>
+						</b:dataTableColumn>
+						
+					</b:dataTable>
+			</b:panel>
+			
+		
+		
+		</p:outputPanel>		
+				
+				
+				
+				
 				
 	</ui:define>
 

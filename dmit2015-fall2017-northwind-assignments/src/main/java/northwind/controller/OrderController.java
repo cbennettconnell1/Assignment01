@@ -103,22 +103,17 @@ public class OrderController implements Serializable{
 
 	public void findOrdersbyCustomer() 
 	{
-		if(!FacesContext.getCurrentInstance().isPostback())
-		{
-			if(currentSelectedCustomerID != null)
-			{
-				orderByCustomer = orderRepository.findAllByCustomerId(currentSelectedCustomerID);
-				if(orderByCustomer == null)
-				{
-					Messages.addGlobalInfo("There are no orders for specified customerId {0}",currentSelectedCustomerID);					
-				}
-			}
-			else
-			{
-				Messages.addGlobalError("Bad request. A valid CustomerID is required");
-			}
+	orderByCustomer = orderRepository.findAllByCustomerId(currentSelectedCustomerID);
+		currentSelectedCustomerID = null;
+		int resultCount = orderByCustomer.size();
+		if (orderByCustomer.size() == 0) {
+			Messages.addGlobalError("Unknown customerId \"{0}\". We found 0 results", currentSelectedCustomerID);
+		} else {
+			Messages.addGlobalInfo("We found {0} results.", resultCount);
 		}
 	}
+	
+	
 
 	public String getCurrentSelectedCustomerID() {
 		return currentSelectedCustomerID;
