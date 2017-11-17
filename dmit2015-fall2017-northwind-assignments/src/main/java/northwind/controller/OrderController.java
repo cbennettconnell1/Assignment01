@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.constraints.NotNull;
 
 import org.omnifaces.util.Messages;
 
@@ -172,13 +173,11 @@ public class OrderController implements Serializable{
 	//assignment 4---
 	@Inject 
 	private OrderService orderService;
-	
-<<<<<<< HEAD
-=======
+
 	@NotNull(message="OrderID field value is required.")
 	private Integer searchValue;		// +getter+setter
 
->>>>>>> branch 'master' of https://github.com/cbennettconnell1/Assignment01.git
+
 
 	public void findOneOrder() {
 		try {
@@ -244,44 +243,7 @@ public class OrderController implements Serializable{
 		public List<Order> getOrderbyDate() {
 			return orderbyDate;
 		}
-		
-		
-		
-		
-		/*	public void findOneOrder() {
-		currentSelectedOrder = orderRepository.findOne(currentSelectedOrderId);
-		if( currentSelectedOrder==0) {
-			Messages.addGlobalInfo("There is no order with orderID {0}", currentSelectedOrderId);					
-		} else {
-			Messages.addGlobalInfo("We found  result with orderID {0}", currentSelectedOrderId);								
-		}
-	}
-<<<<<<< HEAD
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-=======
-	*/
 
->>>>>>> branch 'master' of https://github.com/cbennettconnell1/Assignment01.git
 }
 
 
