@@ -15,4 +15,10 @@ public class OrderService {
 	public Order findOneOrder(int orderId) {
 		return orderRepository.find(orderId);
 	}
+	
+	public Order updateOrder(Order currentOrder)
+	{
+		return orderRepository.edit(currentOrder);
+	}
+	
 }
