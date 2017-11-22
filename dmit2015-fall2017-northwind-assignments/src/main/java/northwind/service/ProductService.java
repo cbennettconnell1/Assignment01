@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.NoResultException;
 
 
 import northwind.data.CategoryRepository;
@@ -55,7 +56,15 @@ public class ProductService {
 		return productRepository.findOne(productId);
 	}
 	
-	
+	public Product findOne(int productId) {
+		Product currentProduct = null;
+		try {
+			currentProduct = productRepository.find(productId);
+		} catch(NoResultException nre) {
+			currentProduct = null;
+		}
+		return currentProduct;
+	}
 	
 	public void createProduct(Product newProduct) {
 		try {

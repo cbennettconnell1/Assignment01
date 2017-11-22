@@ -43,11 +43,11 @@
 			
 			<b:dataTable id="orders" value="#{pOSController.products}" var="currentProduct">
 				<b:dataTableColumn label="Action">
-				<!-- 	<b:commandButton value="delete"
+					<b:commandButton value="delete"
 						immediate="true"
 						ajax="false"
-						actionListener="#{createPlaylistController.removeTrack(currentTrack)}">
-					</b:commandButton> -->
+						actionListener="#{pOSController.removeProduct(currentProduct)}">
+					</b:commandButton>
 				</b:dataTableColumn>
 				<b:dataTableColumn label="productId" value="#{currentProduct.productID}" />
 				<b:dataTableColumn label="Product Name" value="#{currentProduct.productName}" />
@@ -55,10 +55,10 @@
 			</b:dataTable>
 		</b:form>
 		
-	<!-- 	<b:form id="playlistForm">
-			<b:inputText id="playlistName" 
-				label="Playlist Name"
-				value="#{createPlaylistController.playlistName}">
+	    <b:form id="playlistForm">
+			<b:inputText id="CustomerName" 
+				label="Customer Name"
+				value="#{pOSController.}">
 			</b:inputText>
 			<b:commandButton value="Create Playlist"
 				actionListener="#{createPlaylistController.createNewPlaylist()}"
@@ -66,7 +66,7 @@
 			
 			</b:commandButton>
 			
-		</b:form> -->
+		</b:form> 
 	
 				
 	</ui:define>
