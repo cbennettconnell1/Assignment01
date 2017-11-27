@@ -26,6 +26,7 @@ import northwind.service.OrderService;
 @Named
 @ViewScoped
 public class OrderController implements Serializable{
+	
 	@Inject
 	private Logger log;
 	
@@ -57,9 +58,10 @@ public class OrderController implements Serializable{
 				currentSelectedOrder = orderRepository.findOne(currentSelectedOrderId);
 				if(currentSelectedOrder == null)
 				{
-					Messages.addGlobalInfo("There is no order with Order ID{0}", currentSelectedOrderId);;
+					Messages.addGlobalInfo("There is no order with Order ID{0}", currentSelectedOrderId);
 				}
-			}else
+			}
+			else
 			{
 				Messages.addGlobalError("Bad Request.Invalid Order ID {0}", currentSelectedOrderId);		
 			}
@@ -181,17 +183,22 @@ public class OrderController implements Serializable{
 
 
 	public void findOneOrder() {
-		try {
+		try
+		{
 			currentSelectedOrder = orderService.findOneOrder(
 					searchValue);
-			if( currentSelectedOrder == null ) {
+			if( currentSelectedOrder == null ) 
+			{
 				Messages.addGlobalInfo("We found 0 results for {0}",
 						searchValue);
-			} else {
+			} else 
+			{
 				Messages.addGlobalInfo("1 result for {0}", 
 						searchValue);				
 			}
-		} catch(Exception e) {
+		} 
+		catch(Exception e) 
+		{
 			log.info(e.getMessage());
 			currentSelectedOrder = null;
 			Messages.addGlobalInfo("We found 0 results for {0}",
@@ -259,37 +266,28 @@ public class OrderController implements Serializable{
 
 	*/
 	
+	//assignment 5 
+	@NotNull(message="OrderID field value is required")
+	private Order querySingleResult;    //getter	
 	
+	public Order getQuerySingleResult() 
+	{
+		return querySingleResult;
+	}
+
 	public void updateOrder() 
 	{
 		try
 		{
-			//orderService.updateOrder(querySingleResult);
+			orderService.updateOrder(currentSelectedOrder);
 			Messages.addGlobalInfo("Update was successful");
 		}
 		catch (Exception e)
-		{
+		{;
 			Messages.addGlobalInfo("Update was not successful");
+			log.info(e.getMessage());
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 
 }
 
