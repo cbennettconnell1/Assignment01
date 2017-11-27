@@ -32,39 +32,45 @@
 		<b:form id="pointofSalesForm" inline="true">
 			<b:inputText id="productId" 
 				label="Product Id"
-				value="#{pOSController.currentSelectedProductId}">
+				value="#{pOSController.currentProductId}">
 				<b:focus />
 			</b:inputText>
 				
 			<b:commandButton value="Add Product"
-				ajax="false"
-				actionListener="#{pOSController.addProductToOrder()}">
+				ajax="false" update=":messages pointofSalesForm:orders"
+				actionListener="#{pOSController.addItemWithProductId()}">
 			</b:commandButton>	
 			
-			<b:dataTable id="orders" value="#{pOSController.products}" var="currentProduct">
-				<b:dataTableColumn label="Action">
-					<b:commandButton value="delete"
+			<b:dataTable id="orders" value="#{pOSController.items}" var="currentProduct">
+				<b:dataTableColumn label="">
+					<b:commandButton icon="trash"
 						immediate="true"
-						ajax="false"
-						actionListener="#{pOSController.removeProduct(currentProduct)}">
+						actionListener="#{pOSController.removeItem(currentProduct)}"
+						ajax="true" update="shoppingCartTable">							
 					</b:commandButton>
 				</b:dataTableColumn>
-				<b:dataTableColumn label="productId" value="#{currentProduct.productID}" />
-				<b:dataTableColumn label="Product Name" value="#{currentProduct.productName}" />
+				
+				<b:dataTableColumn label="Product ID" value="#{currentProduct.productID}">
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn label="Product Name" value="#{currentProduct.productName}">
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn label="Quantity">
+					<b:inputText value="#{currentProduct.quantityPerUnit}" size="2" update="@(.orders)">
+					</b:inputText>
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn label="Unit Price" value="#{currentProduct.unitPrice}">
+				</b:dataTableColumn>
+				
+			<!-- 	<b:dataTableColumn label="Product Name" value="#{currentProduct.TOTAL}">
+				</b:dataTableColumn> -->
 			
 			</b:dataTable>
 		</b:form>
 		
-	    <b:form id="playlistForm">
-			<b:inputText id="CustomerName" 
-				label="Customer Name"
-				value="#{pOSController.}">
-			</b:inputText>
-			<b:commandButton value="Create Playlist"
-				actionListener="#{createPlaylistController.createNewPlaylist()}"
-				ajax="false">
-			
-			</b:commandButton>
+	 
 			
 		</b:form> 
 	
