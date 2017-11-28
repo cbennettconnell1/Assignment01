@@ -29,7 +29,50 @@
 		
 		<b:messages id="messages" />
 		
-		<b:form id="pointofSalesForm" inline="true">
+		
+		<b:form id="Customer">
+		<b:panelGrid colSpans="6,6" size="sm" >
+				<b:panel title="Select a Customer">
+					<b:selectOneMenu id="customers" 
+						label="Customer"
+						value="#{pOSController.currentSelectedCustomerId}"
+						onchange="ajax:pOSController.changeShippingInfo()" 
+						update="@form">
+						<f:selectItem itemValue="" itemLabel="Choose a Customer" />
+						<f:selectItems value="#{customerController.customers}"
+							var="customer"
+							itemValue="#{customer.customerID}"
+							itemLabel="#{customer.companyName}" />				
+					</b:selectOneMenu>
+					
+					<h:outputLabel value="" />
+					<h:outputText value="" />
+					
+					<h:outputLabel value="" />
+					<h:outputText value="" />
+					
+					<h:outputLabel value="" />
+					<h:outputText value="" />
+					
+					<h:outputLabel value="" />
+					<h:outputText value="" />
+					
+					<h:outputLabel value="" />
+					<h:outputText value="" />
+					
+					<h:outputLabel value="" />
+					<h:outputText value="" />
+					
+					<h:outputLabel value="" />
+					<h:outputText value="" />
+					
+					<h:outputLabel value="" />
+					<h:outputText value="" />
+				</b:panel>	
+			</b:panelGrid>			
+		</b:form>
+		
+		<b:form id="products" inline="true">
 			<b:inputText id="productId" 
 				label="Product Id"
 				value="#{pOSController.currentProductId}">
@@ -37,16 +80,16 @@
 			</b:inputText>
 				
 			<b:commandButton value="Add Product"
-				ajax="false" update=":messages pointofSalesForm:orders"
+				ajax="true" update=":messages products:orders"
 				actionListener="#{pOSController.addItemWithProductId()}">
 			</b:commandButton>	
 			
-			<b:dataTable id="orders" value="#{pOSController.items}" var="currentProduct">
+			<b:dataTable id="orders" value="#{pOSController.items}" var="currentProduct" class="orders">
 				<b:dataTableColumn label="">
 					<b:commandButton icon="trash"
 						immediate="true"
 						actionListener="#{pOSController.removeItem(currentProduct)}"
-						ajax="true" update="shoppingCartTable">							
+						ajax="true" update="orders">							
 					</b:commandButton>
 				</b:dataTableColumn>
 				
@@ -63,16 +106,40 @@
 				
 				<b:dataTableColumn label="Unit Price" value="#{currentProduct.unitPrice}">
 				</b:dataTableColumn>
-				
-			<!-- 	<b:dataTableColumn label="Product Name" value="#{currentProduct.TOTAL}">
-				</b:dataTableColumn> -->
-			
 			</b:dataTable>
 		</b:form>
 		
-	 
+		<b:form id="Employee">			
+			<b:selectOneMenu id="employee" 
+				label="Employee"
+				value="#{pOSController.currentSelectedEmployeeId}"
+				onchange="ajax:pOSController.changeShippingInfo()" 
+				update="@form">
+				<f:selectItem itemValue="" itemLabel="Choose a Employee" />
+				<f:selectItems value="#{employeeController.employees}"
+					var="employee"
+					itemValue="#{employee.employeeID}"
+					itemLabel="#{employee.firstName}, #{employee.lastName}" />				
+			</b:selectOneMenu>
+		</b:form>
+		
+		<b:form id="ShippingInfo">		
+			<b:selectBooleanCheckbox label="Same as Billing Info"></b:selectBooleanCheckbox>	
+			<b:inputText label="Shipping Name"></b:inputText>
+			<b:inputText label="Shipping Name"></b:inputText>
+			<b:inputText label="Shipping Name"></b:inputText>
+			<b:inputText label="Shipping Name"></b:inputText>
+			<b:inputText label="Shipping Name"></b:inputText>
+			<b:inputText label="Shipping Name"></b:inputText>
 			
-		</b:form> 
+			<b:commandButton value="Submit Order"
+				look="primary"
+				ajax="false" 
+				actionListener="#{}">				
+			</b:commandButton>
+		</b:form>
+		
+
 	
 				
 	</ui:define>
