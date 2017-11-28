@@ -15,8 +15,10 @@ import javax.validation.constraints.NotNull;
 
 import org.omnifaces.util.Messages;
 
-
+import northwind.data.CustomerRepository;
 import northwind.data.OrderRepository;
+import northwind.exception.IllegalQuantityException;
+import northwind.model.Customer;
 import northwind.model.Order;
 import northwind.model.OrderDetail;
 import northwind.service.OrderService;
@@ -32,6 +34,9 @@ public class OrderController implements Serializable{
 	
 	@Inject
 	private OrderRepository orderRepository;
+	
+	@Inject
+	private CustomerRepository customerRepository;
 	
 	private List<Order> orders;
 	
@@ -288,7 +293,46 @@ public class OrderController implements Serializable{
 			log.info(e.getMessage());
 		}
 	}
+	
+	/*public void SubmitOrder()
+	{
+		try
+		{
+			int orderId = currentSelectedOrderId;
+			Order order = orderRepository.find(orderId);
+			Messages.addGlobalInfo("Successfully updated order #{0}", orderId);
 
+		}
+		catch (IllegalQuantityException e)
+		{
+			Messages.addGlobalError(e.getMessage());	
+		}
+		catch( Exception e ) 
+		{
+			Messages.addGlobalError("update order was not successful");
+		}
+		
+	}*/
+	
+
+	/*public void SubmitOrder() 
+	{
+		try
+		{
+			String customerID = currentSelectedCustomerID;
+			Customer orderCustomer = customerRepository.find(customerID);
+		}
+		catch (IllegalQuantityException e ) 
+		{
+			Messages.addGlobalError(e.getMessage());	
+		}
+		catch( Exception e ) 
+		{
+			Messages.addGlobalError("Create invoice was not successful");
+		}
+
+	}*/
+	
 }
 
 
