@@ -113,7 +113,7 @@ public class POSController implements Serializable{
 		return "/public/Assignment05/PointofSales.xhtml?faces-redirect=true";
 	}
 	
-/*	@Inject
+    @Inject
 	private OrderService orderService;
 	
 	public void submitOrder() {
@@ -121,7 +121,7 @@ public class POSController implements Serializable{
 			int customerId = currentSelectedCustomerId;
 			Customer orderCustomer = customerRepository.find(customerId);
 		
-			int orderId = orderService.createOrder(
+			 int orderId = orderService.createOrder(
 					orderCustomer, 
 					shippingAddress,
 					shippingCity,
@@ -147,7 +147,7 @@ public class POSController implements Serializable{
 		}
 	}
 	
-	*/
+
 	
 	
 	

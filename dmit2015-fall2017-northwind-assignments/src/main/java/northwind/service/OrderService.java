@@ -1,7 +1,6 @@
 package northwind.service;
 
 
-import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
@@ -36,7 +35,7 @@ public class OrderService {
 	@Inject
 	private EntityManager entityManager;
 	
-	/*public int createOrder(
+	public int createOrder(
 			Customer orderCustomer,
 			String shippingAddress,
 			String shippingCity,
@@ -64,32 +63,32 @@ public class OrderService {
 		Date today = Calendar.getInstance().getTime();
 		newOrder.setOrderDate( new Timestamp(today.getTime()) );
 		// calculate the invoice total
-		double total = 0;
+		/*double total = 0;
 		for(Product singleItem : items) {
-			total += singleItem.getQuantityPerUnit() * singleItem.getUnitPrice().doubleValue();
-		}
+			total += singleItem.getQuantityPerUnit().length() * singleItem.getUnitPrice().doubleValue();
+		}*/
 		// set the invoice total
-		newInvoice.setTotal(BigDecimal.valueOf(total));
+
 		// persist the invoice
-		entityManager.persist(newInvoice);
+		entityManager.persist(newOrder);
 		// get the system generated invoiceId 
-		invoiceId = newInvoice.getInvoiceId();
+		orderId = newOrder.getOrderID();
 		
 		// iterate through each InvoiceLine and persist it
-		for (InvoiceLine singleItem : items) {
+		for (Product singleItem : items) {
 			// rollback the transaction if quantity is less than one
-			if (singleItem.getQuantity() < 1) {
+			if (singleItem.getQuantityPerUnit().length() < 1) {
 				context.setRollbackOnly();
 				throw new IllegalQuantityException("Invalid quantity ordered.");
 			}
 			// set the invoice of each InvoiceLine
-			singleItem.setInvoice(newInvoice);
+		
 			// persist the InvoiceLine
 			entityManager.persist(singleItem);
 		}		
 		
-		return invoiceId;
-	}*/
+		return orderId;
+	}
 	
 
 }

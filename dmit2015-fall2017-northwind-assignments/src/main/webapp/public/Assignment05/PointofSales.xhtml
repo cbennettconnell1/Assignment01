@@ -45,28 +45,37 @@
 							itemLabel="#{customer.companyName}" />				
 					</b:selectOneMenu>
 					
-					<h:outputLabel value="" />
+					<h:outputLabel value="Customer ID" />
 					<h:outputText value="" />
 					
-					<h:outputLabel value="" />
+					<h:outputLabel value="Comapmy Name" />
 					<h:outputText value="" />
 					
-					<h:outputLabel value="" />
+					<h:outputLabel value="Contact Name" />
 					<h:outputText value="" />
 					
-					<h:outputLabel value="" />
+					<h:outputLabel value="Contact Title" />
 					<h:outputText value="" />
 					
-					<h:outputLabel value="" />
+					<h:outputLabel value="Address" />
 					<h:outputText value="" />
 					
-					<h:outputLabel value="" />
+					<h:outputLabel value="City" />
 					<h:outputText value="" />
 					
-					<h:outputLabel value="" />
+					<h:outputLabel value="Region" />
 					<h:outputText value="" />
 					
-					<h:outputLabel value="" />
+					<h:outputLabel value="Postal Code" />
+					<h:outputText value="" />
+					
+					<h:outputLabel value="Country" />
+					<h:outputText value="" />
+					
+					<h:outputLabel value="Phone" />
+					<h:outputText value="" />
+					
+					<h:outputLabel value="Fax" />
 					<h:outputText value="" />
 				</b:panel>	
 			</b:panelGrid>			
@@ -125,17 +134,17 @@
 		
 		<b:form id="ShippingInfo">		
 			<b:selectBooleanCheckbox label="Same as Billing Info"></b:selectBooleanCheckbox>	
-			<b:inputText label="Shipping Name"></b:inputText>
-			<b:inputText label="Shipping Name"></b:inputText>
-			<b:inputText label="Shipping Name"></b:inputText>
-			<b:inputText label="Shipping Name"></b:inputText>
-			<b:inputText label="Shipping Name"></b:inputText>
-			<b:inputText label="Shipping Name"></b:inputText>
+			<b:inputText label="Shipping Name" value="#{customerController.currentSelectedCustomer.companyName}"></b:inputText>
+			<b:inputText label="Shipping Address" value="#{pOSController.shippingAddress}"></b:inputText>
+			<b:inputText label="Shipping City" value="#{pOSController.shippingCity}"></b:inputText>
+			<b:inputText label="Shipping Region" value="#{pOSController.shippingProvince}"></b:inputText>
+			<b:inputText label="Shipping Postal Code" value="#{pOSController.shippingPostalCode}"></b:inputText>
+			<b:inputText label="Shipping Country" value="#{pOSController.shippingCountry}"></b:inputText>
 			
 			<b:commandButton value="Submit Order"
 				look="primary"
 				ajax="false" 
-				actionListener="#{}">				
+				actionListener="#{pOSController.submitOrder()}">				
 			</b:commandButton>
 		</b:form>
 		
