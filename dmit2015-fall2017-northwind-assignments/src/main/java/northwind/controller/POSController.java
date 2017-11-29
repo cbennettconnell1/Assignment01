@@ -10,9 +10,9 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
 
+
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
-
 
 import northwind.data.CustomerRepository;
 import northwind.exception.IllegalQuantityException;
@@ -129,7 +129,7 @@ public class POSController implements Serializable{
 					shippingCountry,
 					shippingPostalCode,
 					new ArrayList<>(items));
-			Messages.addGlobalInfo("Successfully created order #{0}", customerId);
+			Messages.addGlobalInfo("Successfully created order #{0}", orderId);
 
 			// clear the form field values
 			currentSelectedCustomerId = null;
@@ -242,7 +242,7 @@ public class POSController implements Serializable{
 		this.requiredDate = requiredDate;
 	}
 	
-	
+
 	
 }
 

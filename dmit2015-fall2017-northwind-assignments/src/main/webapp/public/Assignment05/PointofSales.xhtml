@@ -32,12 +32,13 @@
 		
 		<b:form id="Customer">
 		<b:panelGrid colSpans="6,6" size="sm" >
-				<b:panel title="Select a Customer">
+				<b:panel id="customerdetails" title="Select a Customer">
 					<b:selectOneMenu id="customers" 
 						label="Customer"
 						value="#{pOSController.currentSelectedCustomerId}"
 						onchange="ajax:pOSController.changeShippingInfo()" 
-						update="@form">
+						update="@form"
+						immediate="true">
 						<f:selectItem itemValue="" itemLabel="Choose a Customer" />
 						<f:selectItems value="#{customerController.customers}"
 							var="customer"
@@ -46,37 +47,37 @@
 					</b:selectOneMenu>
 					
 					<h:outputLabel value="Customer ID" />
-					<h:outputText value="" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.customerID}" />
 					
 					<h:outputLabel value="Comapmy Name" />
-					<h:outputText value="" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.companyName}" />
 					
 					<h:outputLabel value="Contact Name" />
-					<h:outputText value="" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.contactName}" />
 					
 					<h:outputLabel value="Contact Title" />
-					<h:outputText value="" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.contactTitle}" />
 					
 					<h:outputLabel value="Address" />
-					<h:outputText value="" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.address}" />
 					
 					<h:outputLabel value="City" />
-					<h:outputText value="" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.city}" />
 					
 					<h:outputLabel value="Region" />
-					<h:outputText value="" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.region}" />
 					
 					<h:outputLabel value="Postal Code" />
-					<h:outputText value="" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.postalCode}" />
 					
 					<h:outputLabel value="Country" />
-					<h:outputText value="" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.country}" />
 					
 					<h:outputLabel value="Phone" />
-					<h:outputText value="" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.phone}" />
 					
 					<h:outputLabel value="Fax" />
-					<h:outputText value="" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.fax}" />
 				</b:panel>	
 			</b:panelGrid>			
 		</b:form>
@@ -114,6 +115,9 @@
 				</b:dataTableColumn>
 				
 				<b:dataTableColumn label="Unit Price" value="#{currentProduct.unitPrice}">
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn label="Product Total" value="#{of:formatCurrency(singleItem.unitPrice * singleItem.QuantityPerUnit, '$')}">
 				</b:dataTableColumn>
 			</b:dataTable>
 		</b:form>
