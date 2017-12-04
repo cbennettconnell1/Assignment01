@@ -170,10 +170,6 @@ public class OrderController implements Serializable{
 	//assignment 4---
 	@Inject 
 	private OrderService orderService;
-<<<<<<< HEAD
-	
-=======
->>>>>>> refs/remotes/origin/master
 
 	@NotNull(message="OrderID field value is required.")
 	private Integer searchValue;		// +getter+setter
@@ -249,8 +245,7 @@ public class OrderController implements Serializable{
 		public List<Order> getOrderbyDate() {
 			return orderbyDate;
 		}
-<<<<<<< HEAD
-		
+
 		
 		
 		
@@ -290,8 +285,7 @@ public class OrderController implements Serializable{
 			log.info(e.getMessage());
 		}
 	}
-=======
->>>>>>> refs/remotes/origin/master
+
 }
 
 
