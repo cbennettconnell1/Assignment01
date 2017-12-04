@@ -257,10 +257,6 @@ public class OrderController implements Serializable{
 			Messages.addGlobalInfo("We found  result with orderID {0}", currentSelectedOrderId);								
 		}
 	}
-=======
->>>>>>> refs/remotes/origin/master
-
-<<<<<<< HEAD
 	*/
 	
 	//assignment 5 
@@ -297,15 +293,11 @@ public class OrderController implements Serializable{
 			this.currentNewOrder = currentNewOrder;
 		}
 		
+		
+		
 		//assignment5-delete order detail
 		
-		@NotNull
-		private Order querySingleResult;
-		
-		public Order getQuerySingleResult() {
-			return querySingleResult;
-		}
-
+	
 		public void deleteOrder() {
 			try {
 				orderService.removeOrder(querySingleResult);
