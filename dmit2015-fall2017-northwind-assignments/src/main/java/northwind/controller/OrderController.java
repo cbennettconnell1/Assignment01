@@ -15,7 +15,6 @@ import javax.validation.constraints.NotNull;
 
 import org.omnifaces.util.Messages;
 
-
 import northwind.data.OrderRepository;
 import northwind.model.Order;
 import northwind.model.OrderDetail;
@@ -26,11 +25,13 @@ import northwind.service.OrderService;
 @Named
 @ViewScoped
 public class OrderController implements Serializable{
+	
 	@Inject
 	private Logger log;
 	
 	@Inject
 	private OrderRepository orderRepository;
+	
 	
 	private List<Order> orders;
 	
@@ -57,9 +58,10 @@ public class OrderController implements Serializable{
 				currentSelectedOrder = orderRepository.findOne(currentSelectedOrderId);
 				if(currentSelectedOrder == null)
 				{
-					Messages.addGlobalInfo("There is no order with Order ID{0}", currentSelectedOrderId);;
+					Messages.addGlobalInfo("There is no order with Order ID{0}", currentSelectedOrderId);
 				}
-			}else
+			}
+			else
 			{
 				Messages.addGlobalError("Bad Request.Invalid Order ID {0}", currentSelectedOrderId);		
 			}
@@ -103,22 +105,17 @@ public class OrderController implements Serializable{
 
 	public void findOrdersbyCustomer() 
 	{
-		if(!FacesContext.getCurrentInstance().isPostback())
-		{
-			if(currentSelectedCustomerID != null)
-			{
-				orderByCustomer = orderRepository.findAllByCustomerId(currentSelectedCustomerID);
-				if(orderByCustomer == null)
-				{
-					Messages.addGlobalInfo("There are no orders for specified customerId {0}",currentSelectedCustomerID);					
-				}
-			}
-			else
-			{
-				Messages.addGlobalError("Bad request. A valid CustomerID is required");
-			}
+	orderByCustomer = orderRepository.findAllByCustomerId(currentSelectedCustomerID);
+		currentSelectedCustomerID = null;
+		int resultCount = orderByCustomer.size();
+		if (orderByCustomer.size() == 0) {
+			Messages.addGlobalError("Unknown customerId \"{0}\". We found 0 results", currentSelectedCustomerID);
+		} else {
+			Messages.addGlobalInfo("We found {0} results.", resultCount);
 		}
 	}
+	
+	
 
 	public String getCurrentSelectedCustomerID() {
 		return currentSelectedCustomerID;
@@ -173,23 +170,29 @@ public class OrderController implements Serializable{
 	//assignment 4---
 	@Inject 
 	private OrderService orderService;
-	
+
 	@NotNull(message="OrderID field value is required.")
 	private Integer searchValue;		// +getter+setter
 
 
+
 	public void findOneOrder() {
-		try {
+		try
+		{
 			currentSelectedOrder = orderService.findOneOrder(
 					searchValue);
-			if( currentSelectedOrder == null ) {
+			if( currentSelectedOrder == null ) 
+			{
 				Messages.addGlobalInfo("We found 0 results for {0}",
 						searchValue);
-			} else {
+			} else 
+			{
 				Messages.addGlobalInfo("1 result for {0}", 
 						searchValue);				
 			}
-		} catch(Exception e) {
+		} 
+		catch(Exception e) 
+		{
 			log.info(e.getMessage());
 			currentSelectedOrder = null;
 			Messages.addGlobalInfo("We found 0 results for {0}",
@@ -242,7 +245,7 @@ public class OrderController implements Serializable{
 		public List<Order> getOrderbyDate() {
 			return orderbyDate;
 		}
-		
+
 		
 		
 		
@@ -254,7 +257,34 @@ public class OrderController implements Serializable{
 			Messages.addGlobalInfo("We found  result with orderID {0}", currentSelectedOrderId);								
 		}
 	}
+=======
+>>>>>>> refs/remotes/origin/master
+
+<<<<<<< HEAD
 	*/
+	
+	//assignment 5 
+	@NotNull(message="OrderID field value is required")
+	private Order querySingleResult;    //getter	
+	
+	public Order getQuerySingleResult() 
+	{
+		return querySingleResult;
+	}
+
+	public void updateOrder() 
+	{
+		try
+		{
+			orderService.updateOrder(currentSelectedOrder);
+			Messages.addGlobalInfo("Update was successful");
+		}
+		catch (Exception e)
+		{;
+			Messages.addGlobalInfo("Update was not successful");
+			log.info(e.getMessage());
+		}
+	}
 
 		//assignment5-cancel order
 		private Order currentNewOrder = new Order();

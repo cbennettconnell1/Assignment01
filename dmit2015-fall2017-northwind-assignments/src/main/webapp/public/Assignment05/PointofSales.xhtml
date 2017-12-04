@@ -1,0 +1,171 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primefaces.org/ui"  
+	xmlns:hf="http://highfaces.org" 
+	template="/WEB-INF/templates/bootsfaces-dashboard.xhtml">
+	
+	<ui:param name="title" value="[put page title here]" />
+	
+	<ui:define name="externalstyles">
+	</ui:define>
+	
+	<ui:define name="internalstyles">
+	</ui:define>
+
+	<ui:define name="maincontent">
+		<b:jumbotron>
+			<h1>New Product Details</h1>
+		</b:jumbotron>
+		
+		<b:messages id="messages" />
+		
+		
+		<b:form id="CustomerForm">
+
+				<b:panel id="customerdetails" title="Select a Customer">
+					<b:selectOneMenu id="customers" 
+						label="Customer"
+						value="#{pOSController.currentSelectedCustomerId}"
+						onchange="ajax:#{pOSController.currentSelectedCustomerId}" 
+						update="customerdetails">
+						<f:selectItem itemValue="" itemLabel="Choose a Customer" />
+						<f:selectItems value="#{customerController.customers}"
+							var="customer"
+							itemValue="#{customer.customerID}"
+							itemLabel="#{customer.companyName}" />				
+					</b:selectOneMenu>
+					
+					<h:outputLabel value="Customer ID" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.customerID}" /><br />
+					
+					<h:outputLabel value="Comapmy Name" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.companyName}" /><br />
+					
+					<h:outputLabel value="Contact Name" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.contactName}" /><br />
+					
+					<h:outputLabel value="Contact Title" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.contactTitle}" /><br />
+					
+					<h:outputLabel value="Address" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.address}" /><br />
+					
+					<h:outputLabel value="City" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.city}" /><br />
+					
+					<h:outputLabel value="Region" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.region}" /><br />
+					
+					<h:outputLabel value="Postal Code" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.postalCode}" /><br />
+					
+					<h:outputLabel value="Country" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.country}" /><br />
+					
+					<h:outputLabel value="Phone" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.phone}" /><br />
+					
+					<h:outputLabel value="Fax" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.fax}" /><br />
+				</b:panel>				
+		</b:form>
+		
+		<b:form id="products" inline="true">
+			<b:panel title="Products">
+			<b:inputText id="productId" 
+				label="Product Id"
+				value="#{pOSController.currentProductId}">
+				<b:focus />
+			</b:inputText>
+				
+			<b:commandButton value="Add Product"
+				ajax="true" update=":messages products:orders"
+				actionListener="#{pOSController.addItemWithProductId()}">
+			</b:commandButton>	
+			
+			<b:dataTable id="orders" value="#{pOSController.items}" var="currentProduct" class="orders">
+				<b:dataTableColumn label="">
+					<b:commandButton icon="trash"
+						immediate="true"
+						actionListener="#{pOSController.removeItem(currentProduct)}"
+						ajax="true" update="orders">							
+					</b:commandButton>
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn label="Product ID" value="#{currentProduct.productID}">
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn label="Product Name" value="#{currentProduct.productName}">
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn label="Quantity">
+					<b:inputText value="#{currentProduct.quantityPerUnit}" size="2" update="@(.orders)">
+					</b:inputText>
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn label="Unit Price">
+					<h:outputText value="#{currentProduct.unitPrice}">
+						<f:convertNumber type="currency" />
+					</h:outputText>
+				</b:dataTableColumn>
+				
+				<b:dataTableColumn label="Product Total" 
+				value="#{of:formatCurrency(currentProduct.unitPrice * currentProduct.quantityPerUnit, '$')}">
+				</b:dataTableColumn>
+			</b:dataTable>
+			</b:panel>
+		</b:form>
+		
+		<b:form id="OrderInfo">	
+			<b:panel title="Order Information">	
+			<b:selectOneMenu id="employee" 
+				label="Employee"
+				value="#{pOSController.currentSelectedEmployeeId}">
+				<f:selectItem itemValue="" itemLabel="Choose a Employee" />
+				<f:selectItems value="#{employeeController.employees}"
+					var="employee"
+					itemValue="#{employee.employeeID}"
+					itemLabel="#{employee.firstName}, #{employee.lastName}" />				
+			</b:selectOneMenu>
+			
+			<b:inputText label="Shipper">
+			</b:inputText>
+			
+			<b:datepicker label="Required Date">
+			</b:datepicker>
+			</b:panel>	
+		</b:form>
+		
+		<b:form id="ShippingInfo">
+			<b:panel title="Shipping Information">		
+			<b:selectBooleanCheckbox label="Same as Billing Info"></b:selectBooleanCheckbox>	
+			<b:inputText label="Shipping Name" value="#{customerController.currentSelectedCustomer.companyName}"></b:inputText>
+			<b:inputText label="Shipping Address" value="#{pOSController.shippingAddress}"></b:inputText>
+			<b:inputText label="Shipping City" value="#{pOSController.shippingCity}"></b:inputText>
+			<b:inputText label="Shipping Region" value="#{pOSController.shippingProvince}"></b:inputText>
+			<b:inputText label="Shipping Postal Code" value="#{pOSController.shippingPostalCode}"></b:inputText>
+			<b:inputText label="Shipping Country" value="#{pOSController.shippingCountry}"></b:inputText>
+			</b:panel>	
+			<b:commandButton value="Submit Order"
+				look="primary"
+				ajax="false" 
+				actionListener="#{pOSController.submitOrder}">				
+			</b:commandButton>
+		</b:form>
+		
+
+	
+				
+	</ui:define>
+
+</ui:composition>
