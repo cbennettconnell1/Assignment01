@@ -256,6 +256,37 @@ public class OrderController implements Serializable{
 	}
 	*/
 
+		//assignment5-cancel order
+		private Order currentNewOrder = new Order();
+		
+		public Order getCurrentNewOrder() {
+			return currentNewOrder;
+		}
+
+		public void setCurrentNewOrder(Order currentNewOrder) {
+			this.currentNewOrder = currentNewOrder;
+		}
+		
+		//assignment5-delete order detail
+		
+		@NotNull
+		private Order querySingleResult;
+		
+		public Order getQuerySingleResult() {
+			return querySingleResult;
+		}
+
+		public void deleteOrder() {
+			try {
+				orderService.removeOrder(querySingleResult);
+				querySingleResult = null;
+				Messages.addGlobalInfo("Delete was succesful");
+			} catch(Exception e) {
+				Messages.addGlobalInfo("Delete was not successful");
+				log.info(e.getMessage());
+			}
+		}
+
 }
 
 
