@@ -1,0 +1,125 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:b="http://bootsfaces.net/ui"
+	template="/WEB-INF/templates/bootsfaces-dashboard.xhtml"
+                   xmlns:p="http://primefaces.org/ui">
+	
+	<ui:param name="title" value="Northwind - Complete An Order" />
+	
+	<ui:define name="externalstyles">
+	</ui:define>
+	
+	<ui:define name="internalstyles">
+	</ui:define>
+
+	<ui:define name="maincontent">
+		<b:jumbotron>
+			<h1>Find Order</h1>
+		</b:jumbotron>
+		
+		<b:messages id="messages" />	
+		
+		 <b:form id="queryForm">
+			<b:panel title="Find Order">
+				<b:inputText id="searchValue"
+						 	 value="#{orderController.searchValue}">
+				</b:inputText>
+				
+				<b:commandButton value="Search"
+								 look="primary"
+								 ajax="true"
+								 update="messages queryForm:singleResultPanel"
+								 actionListener="#{orderController.findOneOrder()}">
+				</b:commandButton>		
+			</b:panel>			
+			
+			<p:outputPanel id="singleResultPanel">
+				<b:panel title="Order Detail"
+						  rendered="#{not empty orderController.currentSelectedOrder}">			
+					<b:inputText id="orderID"
+								 label="Order ID"
+								 readonly="true"
+								 value="#{orderController.currentSelectedOrder.orderID}">					
+					</b:inputText>
+					
+					 <b:inputText label="Customer" 
+					value="#{orderController.currentSelectedOrder.customer.companyName}" 
+					readonly="true" /> 
+							
+					 <b:inputText label="Employee" 
+					value="#{orderController.currentSelectedOrder.employee.firstName} #{orderController.currentSelectedOrder.employee.lastName}" 
+					readonly="true" />
+					
+										
+					<b:inputText label="Order Date" 
+					value="#{orderController.currentSelectedOrder.orderDate}" 
+					readonly="true">
+					<f:convertDateTime pattern="yyyy-MM-dd"/>
+					</b:inputText> 
+					
+					<b:inputText label="Required Date" 
+					value="#{orderController.currentSelectedOrder.requiredDate}" 
+					readonly="true">
+					<f:convertDateTime pattern="yyyy-MM-dd"/>
+					</b:inputText> 
+					
+					<b:inputText label="Ship Address" 
+					value="#{orderController.currentSelectedOrder.shipAddress}" 
+					readonly="true"/>
+					
+					<b:inputText label="Ship City" 
+					value="#{orderController.currentSelectedOrder.shipCity}" 
+					readonly="true"/>
+					
+					<b:inputText label="Ship Country" 
+					value="#{orderController.currentSelectedOrder.shipCountry}" 
+					readonly="true"/>
+					
+					<b:inputText label="Ship Name" 
+					value="#{orderController.currentSelectedOrder.shipName}" 
+					readonly="true"/>
+					
+					<b:inputText label="Ship Postal Code" 
+					value="#{orderController.currentSelectedOrder.shipPostalCode}" 
+					readonly="true"/>
+					
+					<b:inputText label="Ship Region" 
+					value="#{orderController.currentSelectedOrder.shipRegion}" 
+					readonly="true"/>
+					
+<!-- 					This is the updating part  -->
+					
+					<b:inputText label="Shipped Date" 
+					value="#{orderController.currentSelectedOrder.shippedDate}" >
+					<f:convertDateTime pattern="yyyy-MM-dd"/>
+					</b:inputText>
+					
+					<b:inputText label="Freight" 
+					value="#{orderController.currentSelectedOrder.freight}" >
+					<f:convertNumber type="currency"/>
+					</b:inputText>
+					
+					<b:inputText label="Shipper" 
+					value="#{orderController.currentSelectedOrder.shipper.companyName}" />
+					
+					<b:commandButton value="Update"
+									 look="info"
+									 actionListener="#{orderController.updateOrder()}">	
+					</b:commandButton>				
+					
+				</b:panel>		
+			</p:outputPanel>		
+		
+		</b:form>	 
+							
+	</ui:define>
+</ui:composition>

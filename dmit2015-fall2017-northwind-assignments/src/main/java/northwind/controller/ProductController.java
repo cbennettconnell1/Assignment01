@@ -159,7 +159,8 @@ public class ProductController implements Serializable {
 			productService.createProduct(currentNewProduct, currentSelectedSupplierId, currentCategoryId );
 			Messages.addGlobalInfo("Create product details was successful.");
 			currentNewProduct = new Product();
-		} catch(Exception e) {
+		} catch(Exception e) 
+		{
 			Messages.addGlobalInfo("Create product details was not successful.");
 		}
 	}	

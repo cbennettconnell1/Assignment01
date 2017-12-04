@@ -1,16 +1,20 @@
 package northwind.service;
 
 
+
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+
 import javax.annotation.Resource;
 import javax.ejb.EJBContext;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+
 import javax.persistence.EntityManager;
+
 
 
 import northwind.data.OrderRepository;
@@ -22,6 +26,7 @@ import northwind.model.Product;
 
 @Stateless
 public class OrderService {
+
 	@Inject
 	private OrderRepository orderRepository;
 	
@@ -29,6 +34,12 @@ public class OrderService {
 		return orderRepository.find(orderId);
 	}
 	
+
+	public Order updateOrder(Order currentOrder)
+	{
+		return orderRepository.edit(currentOrder);
+	}
+
 	@Resource
 	private EJBContext context;
 	
@@ -76,5 +87,4 @@ public class OrderService {
 		return orderId;
 	}
 	
-
 }
