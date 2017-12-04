@@ -30,15 +30,14 @@
 		<b:messages id="messages" />
 		
 		
-		<b:form id="Customer">
-		<b:panelGrid colSpans="6,6" size="sm" >
+		<b:form id="CustomerForm">
+
 				<b:panel id="customerdetails" title="Select a Customer">
 					<b:selectOneMenu id="customers" 
 						label="Customer"
 						value="#{pOSController.currentSelectedCustomerId}"
-						onchange="ajax:pOSController.changeShippingInfo()" 
-						update="@form"
-						immediate="true">
+						onchange="ajax:#{pOSController.currentSelectedCustomerId}" 
+						update="customerdetails">
 						<f:selectItem itemValue="" itemLabel="Choose a Customer" />
 						<f:selectItems value="#{customerController.customers}"
 							var="customer"
@@ -47,42 +46,42 @@
 					</b:selectOneMenu>
 					
 					<h:outputLabel value="Customer ID" />
-					<h:outputText value="#{customerController.currentSelectedCustomer.customerID}" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.customerID}" /><br />
 					
 					<h:outputLabel value="Comapmy Name" />
-					<h:outputText value="#{customerController.currentSelectedCustomer.companyName}" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.companyName}" /><br />
 					
 					<h:outputLabel value="Contact Name" />
-					<h:outputText value="#{customerController.currentSelectedCustomer.contactName}" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.contactName}" /><br />
 					
 					<h:outputLabel value="Contact Title" />
-					<h:outputText value="#{customerController.currentSelectedCustomer.contactTitle}" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.contactTitle}" /><br />
 					
 					<h:outputLabel value="Address" />
-					<h:outputText value="#{customerController.currentSelectedCustomer.address}" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.address}" /><br />
 					
 					<h:outputLabel value="City" />
-					<h:outputText value="#{customerController.currentSelectedCustomer.city}" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.city}" /><br />
 					
 					<h:outputLabel value="Region" />
-					<h:outputText value="#{customerController.currentSelectedCustomer.region}" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.region}" /><br />
 					
 					<h:outputLabel value="Postal Code" />
-					<h:outputText value="#{customerController.currentSelectedCustomer.postalCode}" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.postalCode}" /><br />
 					
 					<h:outputLabel value="Country" />
-					<h:outputText value="#{customerController.currentSelectedCustomer.country}" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.country}" /><br />
 					
 					<h:outputLabel value="Phone" />
-					<h:outputText value="#{customerController.currentSelectedCustomer.phone}" />
+					<h:outputText value="#{customerController.currentSelectedCustomer.phone}" /><br />
 					
 					<h:outputLabel value="Fax" />
-					<h:outputText value="#{customerController.currentSelectedCustomer.fax}" />
-				</b:panel>	
-			</b:panelGrid>			
+					<h:outputText value="#{customerController.currentSelectedCustomer.fax}" /><br />
+				</b:panel>				
 		</b:form>
 		
 		<b:form id="products" inline="true">
+			<b:panel title="Products">
 			<b:inputText id="productId" 
 				label="Product Id"
 				value="#{pOSController.currentProductId}">
@@ -114,29 +113,41 @@
 					</b:inputText>
 				</b:dataTableColumn>
 				
-				<b:dataTableColumn label="Unit Price" value="#{currentProduct.unitPrice}">
+				<b:dataTableColumn label="Unit Price">
+					<h:outputText value="#{currentProduct.unitPrice}">
+						<f:convertNumber type="currency" />
+					</h:outputText>
 				</b:dataTableColumn>
 				
-				<b:dataTableColumn label="Product Total" value="#{of:formatCurrency(singleItem.unitPrice * singleItem.QuantityPerUnit, '$')}">
+				<b:dataTableColumn label="Product Total" 
+				value="#{of:formatCurrency(currentProduct.unitPrice * currentProduct.quantityPerUnit, '$')}">
 				</b:dataTableColumn>
 			</b:dataTable>
+			</b:panel>
 		</b:form>
 		
-		<b:form id="Employee">			
+		<b:form id="OrderInfo">	
+			<b:panel title="Order Information">	
 			<b:selectOneMenu id="employee" 
 				label="Employee"
-				value="#{pOSController.currentSelectedEmployeeId}"
-				onchange="ajax:pOSController.changeShippingInfo()" 
-				update="@form">
+				value="#{pOSController.currentSelectedEmployeeId}">
 				<f:selectItem itemValue="" itemLabel="Choose a Employee" />
 				<f:selectItems value="#{employeeController.employees}"
 					var="employee"
 					itemValue="#{employee.employeeID}"
 					itemLabel="#{employee.firstName}, #{employee.lastName}" />				
 			</b:selectOneMenu>
+			
+			<b:inputText label="Shipper">
+			</b:inputText>
+			
+			<b:datepicker label="Required Date">
+			</b:datepicker>
+			</b:panel>	
 		</b:form>
 		
-		<b:form id="ShippingInfo">		
+		<b:form id="ShippingInfo">
+			<b:panel title="Shipping Information">		
 			<b:selectBooleanCheckbox label="Same as Billing Info"></b:selectBooleanCheckbox>	
 			<b:inputText label="Shipping Name" value="#{customerController.currentSelectedCustomer.companyName}"></b:inputText>
 			<b:inputText label="Shipping Address" value="#{pOSController.shippingAddress}"></b:inputText>
@@ -144,11 +155,11 @@
 			<b:inputText label="Shipping Region" value="#{pOSController.shippingProvince}"></b:inputText>
 			<b:inputText label="Shipping Postal Code" value="#{pOSController.shippingPostalCode}"></b:inputText>
 			<b:inputText label="Shipping Country" value="#{pOSController.shippingCountry}"></b:inputText>
-			
+			</b:panel>	
 			<b:commandButton value="Submit Order"
 				look="primary"
 				ajax="false" 
-				actionListener="#{pOSController.submitOrder()}">				
+				actionListener="#{pOSController.submitOrder}">				
 			</b:commandButton>
 		</b:form>
 		
