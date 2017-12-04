@@ -11,6 +11,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.ejb.EJBContext;
 import javax.ejb.Stateless;
+import javax.enterprise.context.spi.Context;
 import javax.inject.Inject;
 
 import javax.persistence.EntityManager;
@@ -22,7 +23,10 @@ import northwind.exception.IllegalQuantityException;
 import northwind.exception.NoProductsException;
 import northwind.model.Customer;
 import northwind.model.Order;
+import northwind.model.OrderDetail;
+
 import northwind.model.Product;
+
 
 @Stateless
 public class OrderService {
@@ -34,6 +38,12 @@ public class OrderService {
 		return orderRepository.find(orderId);
 	}
 	
+
+	//assignment5
+	public void removeOrder(Order currentOrder) {
+		orderRepository.remove(currentOrder);
+	}
+
 
 	public Order updateOrder(Order currentOrder)
 	{
@@ -86,5 +96,5 @@ public class OrderService {
 		
 		return orderId;
 	}
-	
+
 }

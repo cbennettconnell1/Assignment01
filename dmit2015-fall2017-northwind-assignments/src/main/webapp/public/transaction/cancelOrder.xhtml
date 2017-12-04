@@ -1,0 +1,53 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+	xmlns:fn="http://xmlns.jcp.org/jsp/jstl/functions"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:p="http://primefaces.org/ui"  
+	xmlns:hf="http://highfaces.org" 
+	template="/WEB-INF/templates/bootsfaces-dashboard.xhtml">
+	
+	<ui:param name="title" value="Northwind - New Order" />
+	
+	<ui:define name="externalstyles">
+	</ui:define>
+	
+	<ui:define name="internalstyles">
+	</ui:define>
+
+	<ui:define name="maincontent">
+		<b:jumbotron>
+			<h1>New Order Details</h1>
+		</b:jumbotron>
+		
+		<b:messages id="messages" />
+		
+		<b:form id="orderDetailForm" inline="true">
+			
+			<b:dataTable id="tracks" value="#{createOrderController.orders}" var="currentOrder">
+				<b:dataTableColumn label="ProductID" value="#{currentTrack.trackId}" />
+				<b:dataTableColumn label="ProductName" value="#{currentTrack.name}" />
+				<b:dataTableColumn label="Qty" value="#{currentTrack.genre.name}" />
+				<b:dataTableColumn label="Unit Price" value="#{currentTrack.mediaType.name}" />
+				<b:dataTableColumn label="Product Total" value="#{currentTrack.milliseconds}" />
+				<b:dataTableColumn label="Action">
+					<b:commandButton value="delete"
+						immediate="true"
+						ajax="falxe"
+						actionListener="#{createOrderController.cancelOrder(currentOrder)}">
+					</b:commandButton>
+				</b:dataTableColumn>				
+			</b:dataTable>
+			
+		</b:form>
+				
+	</ui:define>
+
+</ui:composition>
